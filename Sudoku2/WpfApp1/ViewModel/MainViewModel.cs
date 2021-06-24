@@ -1,7 +1,7 @@
 using GalaSoft.MvvmLight;
-using WpfApp1.Models;
+using Sudoku.Models;
 
-namespace WpfApp1.ViewModel
+namespace Sudoku.ViewModel
 {
     /// <summary>
     /// This class contains properties that the main View can data bind to.

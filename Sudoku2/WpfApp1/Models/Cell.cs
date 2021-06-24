@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WpfApp1.Models
+namespace Sudoku.Models
 {
     public class Cell : ISudokuPart
     {

@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WpfApp1.Models;
+using Sudoku.Models;
 
-namespace WpfApp1.ViewModel
+namespace Sudoku.ViewModel
 {
     public class CellVM : ViewModelBase
     {
