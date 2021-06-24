@@ -70,7 +70,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\BaseSudoku.cs" />
+    <Compile Include="Models\Cell.cs" />
+    <Compile Include="Models\Grid.cs" />
+    <Compile Include="Models\IrregularSudoku.cs" />
+    <Compile Include="Models\ISudoku.cs" />
+    <Compile Include="Models\ISudokuPart.cs" />
+    <Compile Include="Models\RegularSudoku.cs" />
+    <Compile Include="ViewModel\CellVM.cs" />
+    <Compile Include="ViewModel\GridVM.cs" />
+    <Compile Include="ViewModel\MainGridVM.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\SudokuVM.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -111,6 +122,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
