@@ -32,29 +32,29 @@ namespace WpfApp1.ViewModel
             c1.Y = 150;            
             
             Cell c2 = new Cell();
-            c1.Value = 1;
-            c1.X = 170;
-            c1.Y = 150;            
+            c2.Value = 2;
+            c2.X = 180;
+            c2.Y = 150;            
             
             Cell c3 = new Cell();
-            c1.Value = 1;
-            c1.X = 190;
-            c1.Y = 150;            
+            c3.Value = 3;
+            c3.X = 210;
+            c3.Y = 150;            
             
             Cell c4 = new Cell();
-            c1.Value = 1;
-            c1.X = 150;
-            c1.Y = 170;            
+            c4.Value = 4;
+            c4.X = 150;
+            c4.Y = 180;            
             
             Cell c5 = new Cell();
-            c1.Value = 1;
-            c1.X = 170;
-            c1.Y = 170;            
+            c5.Value = 5;
+            c5.X = 180;
+            c5.Y = 180;            
             
             Cell c6 = new Cell();
-            c1.Value = 1;
-            c1.X = 190;
-            c1.Y = 170;
+            c6.Value = 6;
+            c6.X = 210;
+            c6.Y = 180;
 
             Grid g = new Grid();
             g.X = 150;

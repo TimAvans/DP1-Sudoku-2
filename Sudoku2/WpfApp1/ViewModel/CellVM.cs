@@ -35,7 +35,7 @@ namespace WpfApp1.ViewModel
         public int X { get; set; }
         public int Y { get; set; }
 
-        public int size{ get; }
+        public int size{ get { return 30; } }
 
         public CellVM(Cell cell) 
         {
