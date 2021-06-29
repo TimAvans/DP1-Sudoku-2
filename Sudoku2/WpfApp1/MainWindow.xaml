@@ -58,5 +58,8 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
+        <StackPanel>
+            <Button Command="{Binding LoadSudokuCommand}" Content="Open Sudoku"></Button>
+        </StackPanel>
     </Canvas>
 </Window>

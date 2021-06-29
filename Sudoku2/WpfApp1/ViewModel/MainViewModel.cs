@@ -1,30 +1,23 @@
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using Microsoft.Win32;
 using Sudoku.Models;
+using System;
+using System.IO;
+using System.Windows.Input;
 
 namespace Sudoku.ViewModel
 {
-    /// <summary>
-    /// This class contains properties that the main View can data bind to.
-    /// <para>
-    /// Use the <strong>mvvminpc</strong> snippet to add bindable properties to this ViewModel.
-    /// </para>
-    /// <para>
-    /// You can also use Blend to data bind with the tool's support.
-    /// </para>
-    /// <para>
-    /// See http://www.galasoft.ch/mvvm
-    /// </para>
-    /// </summary>
     public class MainViewModel : ViewModelBase
     {
-        /// <summary>
-        /// Initializes a new instance of the MainViewModel class.
-        /// </summary>
-        /// 
+
         public SudokuVM sudokuVM { get; set; }
 
+        public ICommand LoadSudokuCommand { get; set; }
         public MainViewModel()
         {
+
+            LoadSudokuCommand = new RelayCommand(LoadSudoku);
 
             Cell c1 = new Cell();
             c1.Value = 1;
@@ -80,14 +73,17 @@ namespace Sudoku.ViewModel
 
             sudokuVM = new SudokuVM(rs);
             RaisePropertyChanged("sudokuVM");
-            ////if (IsInDesignMode)
-            ////{
-            ////    // Code runs in Blend --> create design time data.
-            ////}
-            ////else
-            ////{
-            ////    // Code runs "for real"
-            ////}
+        }
+
+        private void LoadSudoku()
+        {
+            string workingDirectory = Environment.CurrentDirectory;
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.InitialDirectory = Directory.GetParent(workingDirectory).Parent.FullName + "\\Files";
+            if (dialog.ShowDialog() == true)
+            {
+                //Make sudoku here
+            }
         }
     }
 }
