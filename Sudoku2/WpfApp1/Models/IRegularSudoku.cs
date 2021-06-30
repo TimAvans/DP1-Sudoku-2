@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WpfApp1.Models
 {
-    public interface IIrregularSudoku
+    public interface IRegularSudoku
     {
         IIrregularSudoku Clone();
 

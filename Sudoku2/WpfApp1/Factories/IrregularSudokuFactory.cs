@@ -18,7 +18,7 @@ namespace WpfApp1.Factories
         public IIrregularSudoku Create(string type)
         {
             IIrregularSudoku tmp = Types[type];
-            return tmp.Clone();
+            return (IIrregularSudoku)tmp.Clone();
         }
 
         public void LoadTypes()

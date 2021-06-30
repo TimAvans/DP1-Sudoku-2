@@ -9,6 +9,10 @@ namespace WpfApp1.Models
 {
     public class SamuraiSudoku : IIrregularSudoku
     {
+        public List<Grid> grids { get; set; }
+
+        public bool isValidated { get; set; }
+
         public SamuraiSudoku() { }
 
         public IIrregularSudoku Clone()
@@ -16,11 +20,7 @@ namespace WpfApp1.Models
             return (SamuraiSudoku)MemberwiseClone();
         }
 
-        public List<Grid> grids { get; set; }
-
-        public bool isValidated { get; set; }
-
-        public virtual bool Validate()
+        public bool Validate()
         {
             return false;
         }
