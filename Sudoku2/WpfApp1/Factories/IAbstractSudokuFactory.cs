@@ -13,8 +13,8 @@ namespace WpfApp1.Factories
 
         void LoadTypes();
 
-        void Register();
+        void Register(string type, T sudoku);
 
-        T Create();
+        T Create(string type);
     }
 }
