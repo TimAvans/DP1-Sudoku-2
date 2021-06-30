@@ -70,13 +70,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Factories\IAbstractSudokuFactory.cs" />
+    <Compile Include="Factories\IrregularSudokuFactory.cs" />
+    <Compile Include="Factories\RegularSudokuFactory.cs" />
     <Compile Include="Models\BaseSudoku.cs" />
     <Compile Include="Models\Cell.cs" />
     <Compile Include="Models\Grid.cs" />
+    <Compile Include="Models\IIrregularSudoku.cs" />
+    <Compile Include="Models\IRegularSudoku.cs" />
     <Compile Include="Models\IrregularSudoku.cs" />
     <Compile Include="Models\ISudoku.cs" />
     <Compile Include="Models\ISudokuPart.cs" />
     <Compile Include="Models\RegularSudoku.cs" />
+    <Compile Include="Models\SamuraiSudoku.cs" />
     <Compile Include="ViewModel\CellVM.cs" />
     <Compile Include="ViewModel\GridVM.cs" />
     <Compile Include="ViewModel\MainGridVM.cs" />
