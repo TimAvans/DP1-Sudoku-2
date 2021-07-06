@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sudoku.Models
+namespace Sudoku.Parsers
 {
-    public class RegularSudoku : BaseSudoku
+    public interface IRegularSudokuParser 
     {
+        IRegularSudokuParser Clone();
     }
 }

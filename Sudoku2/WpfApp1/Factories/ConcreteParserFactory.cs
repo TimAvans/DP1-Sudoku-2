@@ -1,24 +1,21 @@
-﻿using Sudoku.Models;
+﻿using Sudoku.Factories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using WpfApp1.Models;
 
-namespace WpfApp1.Factories
+namespace Sudoku.Factories
 {
-    public class RegularSudokuFactory : IAbstractSudokuFactory<IRegularSudoku>
+    public class ConcreteParserFactory : IAbstractFactory<IParserFactory>
     {
-        public Dictionary<string, IRegularSudoku> Types { get; set; }
+        public Dictionary<string, IParserFactory> Types { get; set; }
 
-        public RegularSudokuFactory() { Types = new Dictionary<string, IRegularSudoku>(); }
-
-        public IRegularSudoku Create(string type)
+        public IParserFactory Create(string type)
         {
-            IRegularSudoku tmp = Types[type];
-            return (IRegularSudoku)tmp.Clone();
+            IParserFactory tmp = Types[type];
+            return (IParserFactory)tmp.Clone();
         }
 
         public void LoadTypes()
@@ -27,21 +24,21 @@ namespace WpfApp1.Factories
 
             foreach (Type type in typesInThisAssembly)
             {
-                if (type.GetInterfaces().Contains(typeof(IRegularSudoku)))
+                if (type.GetInterfaces().Contains(typeof(IParserFactory)))
                 {
                     FieldInfo field = type.GetField("TYPE");
                     if (field == null)
                         Console.WriteLine("There are no types");
                     else
                         Register(field.GetValue(null).ToString(),
-                        (IRegularSudoku)Activator.CreateInstance(type));
+                        (IParserFactory)Activator.CreateInstance(type));
                 }
             }
         }
 
-        public void Register(string type, IRegularSudoku sudoku)
+        public void Register(string type, IParserFactory obj)
         {
-            Types[type] = sudoku;
+            Types[type] = obj;
         }
     }
 }

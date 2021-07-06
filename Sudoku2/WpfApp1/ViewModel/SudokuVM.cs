@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Sudoku.Models;
+using Sudoku.Models.Sudokus;
 
 namespace Sudoku.ViewModel
 {
@@ -20,7 +21,7 @@ namespace Sudoku.ViewModel
         {
             _sudoku = sudoku;
             _grids = new ObservableCollection<MainGridVM>();
-            foreach (Grid g in sudoku.grids)
+            foreach (Grid g in sudoku.Grids)
             {
                 _grids.Add(new MainGridVM(g));
             }

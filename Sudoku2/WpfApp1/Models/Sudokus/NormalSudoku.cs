@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sudoku.Models
+namespace Sudoku.Models.Sudokus
 {
-    public class IrregularSudoku : BaseSudoku
+    public class NormalSudoku : BaseSudoku
     {
+        public NormalSudoku(Grid grid) : base(grid) { }
+
     }
 }

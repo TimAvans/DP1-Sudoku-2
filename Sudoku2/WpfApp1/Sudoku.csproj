@@ -70,19 +70,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Factories\IAbstractSudokuFactory.cs" />
-    <Compile Include="Factories\IrregularSudokuFactory.cs" />
-    <Compile Include="Factories\RegularSudokuFactory.cs" />
-    <Compile Include="Models\BaseSudoku.cs" />
+    <Compile Include="Factories\IAbstractFactory.cs" />
+    <Compile Include="Factories\ConcreteParserFactory.cs" />
+    <Compile Include="Factories\IParserFactory.cs" />
+    <Compile Include="Factories\IrregularSudokuParserFactory.cs" />
+    <Compile Include="Factories\RegularSudokuParserFactory.cs" />
+    <Compile Include="Models\Sudokus\BaseSudoku.cs" />
     <Compile Include="Models\Cell.cs" />
     <Compile Include="Models\Grid.cs" />
-    <Compile Include="Models\IIrregularSudoku.cs" />
-    <Compile Include="Models\IRegularSudoku.cs" />
-    <Compile Include="Models\IrregularSudoku.cs" />
-    <Compile Include="Models\ISudoku.cs" />
+    <Compile Include="Parsers\IIrregularSudokuParser.cs" />
+    <Compile Include="Parsers\IRegularSudokuParser.cs" />
     <Compile Include="Models\ISudokuPart.cs" />
-    <Compile Include="Models\RegularSudoku.cs" />
-    <Compile Include="Models\SamuraiSudoku.cs" />
+    <Compile Include="Models\Sudokus\JigsawSudoku.cs" />
+    <Compile Include="Models\Sudokus\NormalSudoku.cs" />
+    <Compile Include="Models\Sudokus\SamuraiSudoku.cs" />
+    <Compile Include="Parsers\JigsawSudokuParser.cs" />
+    <Compile Include="Parsers\NormalSudokuParser.cs" />
+    <Compile Include="Parsers\SamuraiSudokuParser.cs" />
     <Compile Include="ViewModel\CellVM.cs" />
     <Compile Include="ViewModel\GridVM.cs" />
     <Compile Include="ViewModel\MainGridVM.cs" />
@@ -129,8 +133,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

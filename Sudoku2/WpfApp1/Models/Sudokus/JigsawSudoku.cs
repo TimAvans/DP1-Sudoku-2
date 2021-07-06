@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WpfApp1.Models
+namespace Sudoku.Models.Sudokus
 {
-    public interface IRegularSudoku
+    public class JigsawSudoku : BaseSudoku
     {
-        IIrregularSudoku Clone();
+        public JigsawSudoku(Grid grid) : base(grid) { }
 
-        bool Validate();
     }
 }
