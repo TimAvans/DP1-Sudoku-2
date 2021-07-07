@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Sudoku.Factories
 {
-    public interface IParserFactory<T> : IAbstractFactory<T>
+    public abstract class AbstractParserFactory
     {
-        IParserFactory<T> Clone();
+        public abstract AbstractParserFactory Clone();
     }
 }

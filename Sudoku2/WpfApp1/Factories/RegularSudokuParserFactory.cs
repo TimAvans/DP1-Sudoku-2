@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace Sudoku.Factories
 {
-    public class IRegularSudokuParserFactory : AbstractParserFactory, IParserFactory<IRegularSudokuParser>
+    public class RegularSudokuParserFactory : AbstractParserFactory, IAbstractFactory<IRegularSudokuParser>
     {
         public Dictionary<string, IRegularSudokuParser> Types { get; set; }
 
-        public IRegularSudokuParserFactory() { Types = new Dictionary<string, IRegularSudokuParser>(); }
+        public RegularSudokuParserFactory() { Types = new Dictionary<string, IRegularSudokuParser>(); }
 
         public void LoadTypes()
         {
@@ -26,18 +26,19 @@ namespace Sudoku.Factories
                 {
                     FieldInfo field = type.GetField("TYPE");
                     if (field == null)
+                    {
                         Console.WriteLine("There are no types");
+                    }
                     else
+                    {
                         Register(field.GetValue(null).ToString(),
                         (IRegularSudokuParser)Activator.CreateInstance(type));
+                    }
                 }
             }
         }
 
-        public IParserFactory<IRegularSudokuParser> Clone()
-        {
-            return (IRegularSudokuParserFactory)MemberwiseClone();
-        }
+
 
         public void Register(string type, IRegularSudokuParser obj)
         {
@@ -48,6 +49,11 @@ namespace Sudoku.Factories
         {
             IRegularSudokuParser tmp = Types[type];
             return (IRegularSudokuParser)tmp.Clone();
+        }
+
+        public override AbstractParserFactory Clone()
+        {
+            return (RegularSudokuParserFactory)MemberwiseClone();
         }
     }
 }

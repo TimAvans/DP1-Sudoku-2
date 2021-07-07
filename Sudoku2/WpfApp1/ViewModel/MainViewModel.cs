@@ -4,6 +4,7 @@ using Microsoft.Win32;
 using Sudoku.Factories;
 using Sudoku.Models;
 using Sudoku.Models.Sudokus;
+using Sudoku.Parsers;
 using System;
 using System.IO;
 using System.Windows.Input;
@@ -84,12 +85,18 @@ namespace Sudoku.ViewModel
             string filename = "";
             if (dialog.ShowDialog() == true)
             {
+                BaseSudoku sudoku;
                 if(filename.Contains("4x4") || filename.Contains("6x6") || filename.Contains("9x9"))
                 {
-                    IParserFactory parserFactory = _concreteParserFactory.Create("NormalSudoku");
-                    parserFactory.Create("test" );
+                    RegularSudokuParserFactory parserFactory = (RegularSudokuParserFactory)_concreteParserFactory.Create("NormalSudoku");
+                    IRegularSudokuParser parser = parserFactory.Create("test");
+                    //sudoku = parser.parse();
+                } else
+                {
+                    IrregularSudokuParserFactory parserFactory = (IrregularSudokuParserFactory)_concreteParserFactory.Create("NotNormalSudoku");
+                    IIrregularSudokuParser parser = parserFactory.Create("test");
+                    //sudoku = parser.parse()
                 }
-
                 RaisePropertyChanged("sudokuVM");
             }
         }

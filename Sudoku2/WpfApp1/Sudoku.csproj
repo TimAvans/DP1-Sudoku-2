@@ -72,7 +72,7 @@
     </ApplicationDefinition>
     <Compile Include="Factories\IAbstractFactory.cs" />
     <Compile Include="Factories\ConcreteParserFactory.cs" />
-    <Compile Include="Factories\IParserFactory.cs" />
+    <Compile Include="Factories\AbstractParserFactory.cs" />
     <Compile Include="Factories\IrregularSudokuParserFactory.cs" />
     <Compile Include="Factories\RegularSudokuParserFactory.cs" />
     <Compile Include="Models\Sudokus\BaseSudoku.cs" />

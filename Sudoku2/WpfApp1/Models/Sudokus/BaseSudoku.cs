@@ -23,9 +23,6 @@ namespace Sudoku.Models.Sudokus
             Grids.Add(grid);
         }
 
-        public virtual bool Validate()
-        {
-            return false;
-        }
+        public abstract bool Validate();
     }
 }

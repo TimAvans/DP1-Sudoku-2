@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace Sudoku.Factories
 {
-    public class ConcreteParserFactory : IAbstractFactory<IParserFactory>
+    public class ConcreteParserFactory : IAbstractFactory<AbstractParserFactory>
     {
-        public Dictionary<string, IParserFactory> Types { get; set; }
+        public Dictionary<string, AbstractParserFactory> Types { get; set; }
 
-        public IParserFactory Create(string type)
+        public AbstractParserFactory Create(string type)
         {
-            IParserFactory tmp = Types[type];
-            return (IParserFactory)tmp.Clone();
+            AbstractParserFactory tmp = Types[type];
+            return (AbstractParserFactory)tmp.Clone();
         }
 
         public void LoadTypes()
@@ -24,19 +24,23 @@ namespace Sudoku.Factories
 
             foreach (Type type in typesInThisAssembly)
             {
-                if (type.GetInterfaces().Contains(typeof(IParserFactory)))
+                if (type.GetInterfaces().Contains(typeof(AbstractParserFactory)))
                 {
                     FieldInfo field = type.GetField("TYPE");
                     if (field == null)
+                    {
                         Console.WriteLine("There are no types");
+                    }
                     else
+                    {
                         Register(field.GetValue(null).ToString(),
-                        (IParserFactory)Activator.CreateInstance(type));
+                        (AbstractParserFactory)Activator.CreateInstance(type));
+                    }
                 }
             }
         }
 
-        public void Register(string type, IParserFactory obj)
+        public void Register(string type, AbstractParserFactory obj)
         {
             Types[type] = obj;
         }
