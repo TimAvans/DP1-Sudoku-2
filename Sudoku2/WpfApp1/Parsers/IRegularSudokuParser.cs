@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WpfApp1.Models
+namespace Sudoku.Parsers
 {
-    public interface IRegularSudoku
+    public interface IRegularSudokuParser 
     {
-        IIrregularSudoku Clone();
-
-        bool Validate();
+        IRegularSudokuParser Clone();
     }
 }

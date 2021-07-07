@@ -4,16 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WpfApp1.Factories
+namespace Sudoku.Factories
 {
-    public interface IAbstractSudokuFactory<T>
+    public interface IAbstractFactory<T>
     {
         //Factory functies
         Dictionary<string, T> Types { get; set; }
 
         void LoadTypes();
 
-        void Register(string type, T sudoku);
+        void Register(string type, T obj);
 
         T Create(string type);
     }

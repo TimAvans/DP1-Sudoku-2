@@ -1,7 +1,10 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Microsoft.Win32;
+using Sudoku.Factories;
 using Sudoku.Models;
+using Sudoku.Models.Sudokus;
+using Sudoku.Parsers;
 using System;
 using System.IO;
 using System.Windows.Input;
@@ -10,69 +13,68 @@ namespace Sudoku.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
-
         public SudokuVM sudokuVM { get; set; }
 
         public ICommand LoadSudokuCommand { get; set; }
+
+
+        private ConcreteParserFactory _concreteParserFactory;
         public MainViewModel()
         {
 
             LoadSudokuCommand = new RelayCommand(LoadSudoku);
 
-            Cell c1 = new Cell();
-            c1.Value = 1;
-            c1.X = 150;
-            c1.Y = 150;            
+            _concreteParserFactory = new ConcreteParserFactory();
+
+            //Cell c1 = new Cell();
+            //c1.Value = 1;
+            //c1.X = 150;
+            //c1.Y = 150;            
             
-            Cell c2 = new Cell();
-            c2.Value = 2;
-            c2.X = 180;
-            c2.Y = 150;            
+            //Cell c2 = new Cell();
+            //c2.Value = 2;
+            //c2.X = 180;
+            //c2.Y = 150;            
             
-            Cell c3 = new Cell();
-            c3.Value = 3;
-            c3.X = 210;
-            c3.Y = 150;            
+            //Cell c3 = new Cell();
+            //c3.Value = 3;
+            //c3.X = 210;
+            //c3.Y = 150;            
             
-            Cell c4 = new Cell();
-            c4.Value = 4;
-            c4.X = 150;
-            c4.Y = 180;            
+            //Cell c4 = new Cell();
+            //c4.Value = 4;
+            //c4.X = 150;
+            //c4.Y = 180;            
             
-            Cell c5 = new Cell();
-            c5.Value = 5;
-            c5.X = 180;
-            c5.Y = 180;            
+            //Cell c5 = new Cell();
+            //c5.Value = 5;
+            //c5.X = 180;
+            //c5.Y = 180;            
             
-            Cell c6 = new Cell();
-            c6.Value = 6;
-            c6.X = 210;
-            c6.Y = 180;
+            //Cell c6 = new Cell();
+            //c6.Value = 6;
+            //c6.X = 210;
+            //c6.Y = 180;
 
-            Grid g = new Grid();
-            g.X = 150;
-            g.Y = 150;
+            //Grid g = new Grid();
+            //g.X = 150;
+            //g.Y = 150;
 
 
-            g.Parts = new System.Collections.Generic.List<ISudokuPart>() 
-            { 
-                c1,c2,c3,c4,c5,c6,
-            };
+            //g.Parts = new System.Collections.Generic.List<ISudokuPart>() 
+            //{ 
+            //    c1,c2,c3,c4,c5,c6,
+            //};
 
-            Grid mg = new Grid();
-            mg.X = 150;
-            mg.Y = 150;
+            //Grid mg = new Grid();
+            //mg.X = 150;
+            //mg.Y = 150;
 
-            mg.Parts = new System.Collections.Generic.List<ISudokuPart>() { g };
-            RegularSudoku rs = new RegularSudoku();
+            //mg.Parts = new System.Collections.Generic.List<ISudokuPart>() { g };
+            //NormalSudoku rs = new NormalSudoku(mg);
 
-            rs.grids = new System.Collections.Generic.List<Grid>() 
-            {
-               mg
-            };
-
-            sudokuVM = new SudokuVM(rs);
-            RaisePropertyChanged("sudokuVM");
+            //sudokuVM = new SudokuVM(rs);
+            //RaisePropertyChanged("sudokuVM");
         }
 
         private void LoadSudoku()
@@ -80,9 +82,22 @@ namespace Sudoku.ViewModel
             string workingDirectory = Environment.CurrentDirectory;
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.InitialDirectory = Directory.GetParent(workingDirectory).Parent.FullName + "\\Files";
+            string filename = "";
             if (dialog.ShowDialog() == true)
             {
-                //Make sudoku here
+                BaseSudoku sudoku;
+                if(filename.Contains("4x4") || filename.Contains("6x6") || filename.Contains("9x9"))
+                {
+                    RegularSudokuParserFactory parserFactory = (RegularSudokuParserFactory)_concreteParserFactory.Create("NormalSudoku");
+                    IRegularSudokuParser parser = parserFactory.Create("test");
+                    //sudoku = parser.parse();
+                } else
+                {
+                    IrregularSudokuParserFactory parserFactory = (IrregularSudokuParserFactory)_concreteParserFactory.Create("NotNormalSudoku");
+                    IIrregularSudokuParser parser = parserFactory.Create("test");
+                    //sudoku = parser.parse()
+                }
+                RaisePropertyChanged("sudokuVM");
             }
         }
     }
