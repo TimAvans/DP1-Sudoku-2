@@ -32,10 +32,11 @@ namespace Sudoku.ViewModel
             }
         }
 
-        public int X { get; set; }
-        public int Y { get; set; }
+        private int _x, _y;
+        public int X { get { return _x; } set { _x = value * Size; } }
+        public int Y { get { return _y; } set { _y = value * Size; } }
 
-        public int size{ get { return 30; } }
+        public int Size{ get { return 30; } }
 
         public CellVM(Cell cell) 
         {

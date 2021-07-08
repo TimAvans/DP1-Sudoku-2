@@ -8,7 +8,7 @@
         Title="MainWindow" Height="450" Width="800"        
         DataContext="{Binding Main, Source={StaticResource Locator}}">
     <Canvas Width="800" Height="800" Background="Transparent">
-        <ItemsControl ItemsSource="{Binding sudokuVM.Grids, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+        <ItemsControl ItemsSource="{Binding Sudoku.Grids, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Canvas/>
@@ -45,8 +45,8 @@
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
                                             <Canvas>
-                                                <TextBox Foreground="White" Background="Black" Width="{Binding size}" Height="{Binding size}" Text="{Binding Value}" FontSize="12"/>
-                                                <Rectangle Width="{Binding size}" Height="{Binding size}" Stroke="Black">
+                                                <TextBox Foreground="White" Background="Black" Width="{Binding Size}" Height="{Binding Size}" Text="{Binding Value}" FontSize="12"/>
+                                                <Rectangle Width="{Binding Size}" Height="{Binding Size}" Stroke="Black">
                                                 </Rectangle>
                                             </Canvas>
                                         </DataTemplate>

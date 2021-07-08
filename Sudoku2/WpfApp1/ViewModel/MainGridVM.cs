@@ -22,14 +22,15 @@ namespace Sudoku.ViewModel
         public MainGridVM(Grid grid) 
         {
             _grid = grid;
-            X = grid.X;
-            Y = grid.Y;
             _grids = new ObservableCollection<GridVM>();
 
             foreach (Grid g in grid.Parts)
             {
                 _grids.Add(new GridVM(g));
             }
+
+            X = 100;
+            Y = 100;
         }
     }
 }

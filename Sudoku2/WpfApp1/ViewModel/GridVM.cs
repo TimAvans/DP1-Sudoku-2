@@ -15,14 +15,10 @@ namespace Sudoku.ViewModel
 
         private ObservableCollection<CellVM> _cells;
         public ObservableCollection<CellVM> Cells { get { return _cells; } set { _cells = value; RaisePropertyChanged("Cells"); } }
-        public int X { get; set; }
-        public int Y { get; set; }
 
         public GridVM(Grid grid) 
         {
             _grid = grid;
-            X = grid.X;
-            Y = grid.Y;
             _cells = new ObservableCollection<CellVM>();
             foreach (Cell c in grid.Parts) 
             {

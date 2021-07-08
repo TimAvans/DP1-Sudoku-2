@@ -13,7 +13,7 @@ namespace Sudoku.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
-        public SudokuVM sudokuVM { get; set; }
+        public SudokuVM Sudoku { get; set; }
 
         public ICommand LoadSudokuCommand { get; set; }
 
@@ -25,6 +25,8 @@ namespace Sudoku.ViewModel
             LoadSudokuCommand = new RelayCommand(LoadSudoku);
 
             _concreteParserFactory = new ConcreteParserFactory();
+
+
 
             //Cell c1 = new Cell();
             //c1.Value = 1;
@@ -82,22 +84,27 @@ namespace Sudoku.ViewModel
             string workingDirectory = Environment.CurrentDirectory;
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.InitialDirectory = Directory.GetParent(workingDirectory).Parent.FullName + "\\Files";
-            string filename = "";
             if (dialog.ShowDialog() == true)
             {
-                BaseSudoku sudoku;
-                if(filename.Contains("4x4") || filename.Contains("6x6") || filename.Contains("9x9"))
-                {
-                    RegularSudokuParserFactory parserFactory = (RegularSudokuParserFactory)_concreteParserFactory.Create("NormalSudoku");
-                    IRegularSudokuParser parser = parserFactory.Create("test");
-                    //sudoku = parser.parse();
-                } else
-                {
-                    IrregularSudokuParserFactory parserFactory = (IrregularSudokuParserFactory)_concreteParserFactory.Create("NotNormalSudoku");
-                    IIrregularSudokuParser parser = parserFactory.Create("test");
-                    //sudoku = parser.parse()
-                }
-                RaisePropertyChanged("sudokuVM");
+                SamuraiSudokuParser parser = new SamuraiSudokuParser();
+
+                Sudoku = new SudokuVM(parser.Parse(dialog.FileName));
+                Console.WriteLine(Sudoku.Grids[0].X);
+
+
+                //BaseSudoku sudoku;
+                //if(filename.Contains("4x4") || filename.Contains("6x6") || filename.Contains("9x9"))
+                //{
+                //    RegularSudokuParserFactory parserFactory = (RegularSudokuParserFactory)_concreteParserFactory.Create("NormalSudoku");
+                //    IRegularSudokuParser parser = parserFactory.Create("test");
+                //    //sudoku = parser.parse();
+                //} else
+                //{
+                //    IrregularSudokuParserFactory parserFactory = (IrregularSudokuParserFactory)_concreteParserFactory.Create("NotNormalSudoku");
+                //    IIrregularSudokuParser parser = parserFactory.Create("test");
+                //    //sudoku = parser.parse()
+                //}
+                RaisePropertyChanged("Sudoku");
             }
         }
     }

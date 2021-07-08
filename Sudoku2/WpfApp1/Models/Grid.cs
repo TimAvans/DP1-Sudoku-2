@@ -8,6 +8,18 @@ namespace Sudoku.Models
 {
     public class Grid : ISudokuPart
     {
+        public Grid()
+        {
+            Parts = new List<ISudokuPart>();
+        }
+
+        public Grid(int x, int y)
+        {
+            Parts = new List<ISudokuPart>();
+            X = x;
+            Y = y;
+        }
+
         public List<ISudokuPart> Parts { get; set; }
         public bool isValidated { get; set; }
         public int X { get; set ; }
