@@ -16,8 +16,8 @@ namespace Sudoku.ViewModel
         private ObservableCollection<GridVM> _grids;
         public ObservableCollection<GridVM> Grids { get { return _grids; } set { _grids = value; RaisePropertyChanged("Grids"); } }
 
-        public int X { get; set; }
-        public int Y { get; set; }
+        public int X { get { return _grid.X; } set { _grid.X = value; RaisePropertyChanged("X"); } }
+        public int Y { get { return _grid.Y; } set { _grid.Y = value; RaisePropertyChanged("Y"); } }
 
         public MainGridVM(Grid grid) 
         {
@@ -28,9 +28,6 @@ namespace Sudoku.ViewModel
             {
                 _grids.Add(new GridVM(g));
             }
-
-            X = 100;
-            Y = 100;
         }
     }
 }

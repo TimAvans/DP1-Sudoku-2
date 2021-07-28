@@ -22,7 +22,7 @@ namespace Sudoku.Models
 
         public List<ISudokuPart> Parts { get; set; }
         public bool isValidated { get; set; }
-        public int X { get; set ; }
-        public int Y { get ; set ; }
+        public int X { get; set; }
+        public int Y { get; set; }
     }
 }
