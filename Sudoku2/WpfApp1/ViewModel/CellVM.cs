@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Sudoku.Models;
+using WpfApp1.State;
 
 namespace Sudoku.ViewModel
 {
@@ -16,7 +17,7 @@ namespace Sudoku.ViewModel
         {
             get
             {
-                return _cell.Value.ToString();
+                return _cell.Value > 0 ? _cell.Value.ToString() : "";
             }
             set
             {
@@ -25,7 +26,7 @@ namespace Sudoku.ViewModel
                 {
                     if (temp <= 9 && temp >= 0)
                     {
-                        _cell.Value = temp;
+                        _cell.Value = StateManager.Instance().CurrentState.ChangeNumber(_cell, temp); ;
                         RaisePropertyChanged("Value");
                     }
                 }
@@ -35,6 +36,8 @@ namespace Sudoku.ViewModel
         private int _x, _y;
         public int X { get { return _x; } set { _x = value * Size; } }
         public int Y { get { return _y; } set { _y = value * Size; } }
+
+        public NumberType NumberState { get { return _cell.NumberState; } set { _cell.NumberState = value; } }
 
         public int Size{ get { return 30; } }
 

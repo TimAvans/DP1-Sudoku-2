@@ -11,6 +11,8 @@ namespace Sudoku.Parsers
 {
     public class SamuraiSudokuParser : IIrregularSudokuParser
     {
+        public const string TYPE = "samurai";
+
         public IIrregularSudokuParser Clone()
         {
             return (SamuraiSudokuParser)MemberwiseClone();

@@ -13,8 +13,13 @@ namespace Sudoku.Factories
     public class IrregularSudokuParserFactory : AbstractParserFactory, IAbstractFactory<IIrregularSudokuParser>
     {
         public Dictionary<string, IIrregularSudokuParser> Types { get; set; }
+        public const string TYPE = "NotNormalSudoku";
 
-        public IrregularSudokuParserFactory() { Types = new Dictionary<string, IIrregularSudokuParser>(); }
+
+        public IrregularSudokuParserFactory() { 
+            Types = new Dictionary<string, IIrregularSudokuParser>();
+            LoadTypes();
+        }
 
         public void LoadTypes()
         {

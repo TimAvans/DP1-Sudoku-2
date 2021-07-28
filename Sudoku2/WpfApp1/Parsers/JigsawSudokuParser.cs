@@ -12,6 +12,8 @@ namespace Sudoku.Parsers
 {
     public class JigsawSudokuParser : IIrregularSudokuParser
     {
+        public const string TYPE = "jigsaw";
+
         public IIrregularSudokuParser Clone()
         {
             return (JigsawSudokuParser)MemberwiseClone();
@@ -20,6 +22,8 @@ namespace Sudoku.Parsers
         public BaseSudoku Parse(string filedata)
         {
             Grid board = new Grid();
+            board.X = 100;
+            board.Y = 100;
 
             string line = File.ReadAllLines(filedata)[0];
 

@@ -12,6 +12,12 @@ namespace Sudoku.Factories
     {
         public Dictionary<string, AbstractParserFactory> Types { get; set; }
 
+        public ConcreteParserFactory()
+        {
+            Types = new Dictionary<string, AbstractParserFactory>();
+            LoadTypes();
+        }
+
         public AbstractParserFactory Create(string type)
         {
             AbstractParserFactory tmp = Types[type];
@@ -24,7 +30,7 @@ namespace Sudoku.Factories
 
             foreach (Type type in typesInThisAssembly)
             {
-                if (type.GetInterfaces().Contains(typeof(AbstractParserFactory)))
+                if (type.BaseType == typeof(AbstractParserFactory))
                 {
                     FieldInfo field = type.GetField("TYPE");
                     if (field == null)

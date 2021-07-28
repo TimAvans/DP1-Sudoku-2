@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Sudoku"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"        
+        Title="MainWindow"
+        WindowState="Maximized"
         DataContext="{Binding Main, Source={StaticResource Locator}}">
     <Canvas Width="800" Height="800" Background="Transparent">
         <ItemsControl ItemsSource="{Binding Sudoku.Grids, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
@@ -60,6 +61,7 @@
         </ItemsControl>
         <StackPanel>
             <Button Command="{Binding LoadSudokuCommand}" Content="Open Sudoku"></Button>
+            <Button Command="{Binding ChangeStateCommand}" Content="{Binding StateText}"></Button>
         </StackPanel>
     </Canvas>
 </Window>

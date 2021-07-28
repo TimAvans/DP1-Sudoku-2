@@ -14,7 +14,12 @@ namespace Sudoku.Factories
     {
         public Dictionary<string, IRegularSudokuParser> Types { get; set; }
 
-        public RegularSudokuParserFactory() { Types = new Dictionary<string, IRegularSudokuParser>(); }
+        public RegularSudokuParserFactory() { 
+            Types = new Dictionary<string, IRegularSudokuParser>(); 
+            LoadTypes(); 
+        }
+
+        public const string TYPE = "NormalSudoku";
 
         public void LoadTypes()
         {

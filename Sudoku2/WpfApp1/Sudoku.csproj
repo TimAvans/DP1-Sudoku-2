@@ -87,6 +87,10 @@
     <Compile Include="Parsers\JigsawSudokuParser.cs" />
     <Compile Include="Parsers\NormalSudokuParser.cs" />
     <Compile Include="Parsers\SamuraiSudokuParser.cs" />
+    <Compile Include="State\DefinitiveState.cs" />
+    <Compile Include="State\HelpState.cs" />
+    <Compile Include="State\State.cs" />
+    <Compile Include="State\StateManager.cs" />
     <Compile Include="ViewModel\CellVM.cs" />
     <Compile Include="ViewModel\GridVM.cs" />
     <Compile Include="ViewModel\MainGridVM.cs" />

@@ -12,6 +12,8 @@ namespace Sudoku.Parsers
 {
     public class NormalSudokuParser : IRegularSudokuParser
     {
+        public const string TYPE = "normal";
+
         public IRegularSudokuParser Clone()
         {
             return (NormalSudokuParser)MemberwiseClone();
@@ -23,6 +25,8 @@ namespace Sudoku.Parsers
 
 
             Grid board = new Grid();
+            board.X = 100;
+            board.Y = 100;
             //Grid array
             // -> subrosters -> cells
             int gridWidth = (int)Math.Sqrt(line.Length);
