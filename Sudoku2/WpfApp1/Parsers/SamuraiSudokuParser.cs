@@ -38,8 +38,6 @@ namespace Sudoku.Parsers
 
             int superRegNumber = 0;
 
-
-
             foreach (string line in file)
             {
                 int regNumber = -1;
