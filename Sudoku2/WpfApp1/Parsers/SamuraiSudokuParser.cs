@@ -22,7 +22,7 @@ namespace Sudoku.Parsers
         {
             List<string> file = File.ReadAllLines(filedata).ToList();
 
-            List<Grid> boards = new List<Grid>();
+            List<MainGrid> boards = new List<MainGrid>();
 
             int superRegNumber = 0;
 
@@ -88,7 +88,7 @@ namespace Sudoku.Parsers
                     regions[regNumber].Parts.Add(cell);
                 }
 
-                boards.Add(new Grid());
+                boards.Add(new MainGrid());
                 foreach (Grid grid in regions)
                 {
                     boards[superRegNumber].Parts.Add(grid);

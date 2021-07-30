@@ -9,6 +9,7 @@ using System;
 using System.IO;
 using System.Windows.Input;
 using WpfApp1.State;
+using WpfApp1.Visitor;
 
 namespace Sudoku.ViewModel
 {
@@ -20,6 +21,7 @@ namespace Sudoku.ViewModel
 
         public ICommand LoadSudokuCommand { get; set; }
         public ICommand ChangeStateCommand { get; set; }
+        public ICommand ValidateCommand { get; set; }
 
         private ConcreteParserFactory _concreteParserFactory;
 
@@ -28,6 +30,7 @@ namespace Sudoku.ViewModel
         {
             LoadSudokuCommand = new RelayCommand(LoadSudoku);
             ChangeStateCommand = new RelayCommand(ChangeGameState);
+            ValidateCommand = new RelayCommand(ValidateSudoku);
 
             StateText = "Change To Definitive State";
 
@@ -48,6 +51,24 @@ namespace Sudoku.ViewModel
             }
 
             RaisePropertyChanged("StateText");
+        }        
+        
+        private void ValidateSudoku()
+        {
+            ValidationVisitor v = new ValidationVisitor();
+            foreach (var maingrid in Sudoku.Grids)
+            {
+                foreach (var grid in maingrid.Grids)
+                {
+                    foreach (var cell in grid.Cells)
+                    {
+                        cell.getCell().Accept(v);
+                    }
+                    grid.getGrid().Accept(v);
+                }
+                maingrid.getGrid().Accept(v);
+            }
+            Sudoku.getSudoku().Accept(v);
         }
 
         private void LoadSudoku()

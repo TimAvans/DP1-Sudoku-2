@@ -24,7 +24,7 @@ namespace Sudoku.Parsers
             string line = File.ReadAllLines(filedata)[0];
 
 
-            Grid board = new Grid();
+            MainGrid board = new MainGrid();
             board.X = 100;
             board.Y = 100;
             //Grid array

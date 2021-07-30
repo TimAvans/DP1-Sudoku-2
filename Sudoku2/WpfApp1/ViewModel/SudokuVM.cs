@@ -21,10 +21,15 @@ namespace Sudoku.ViewModel
         {
             _sudoku = sudoku;
             _grids = new ObservableCollection<MainGridVM>();
-            foreach (Grid g in sudoku.Grids)
+            foreach (MainGrid g in sudoku.Grids)
             {
                 _grids.Add(new MainGridVM(g));
             }
+        }
+
+        public BaseSudoku getSudoku() 
+        { 
+            return _sudoku;      
         }
     }
 }

@@ -47,5 +47,10 @@ namespace Sudoku.ViewModel
             X = cell.X;
             Y = cell.Y;
         }
+
+        public Cell getCell()      
+        {
+            return _cell;
+        }
     }
 }

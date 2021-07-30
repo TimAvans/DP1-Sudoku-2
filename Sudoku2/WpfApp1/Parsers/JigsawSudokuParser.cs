@@ -21,7 +21,7 @@ namespace Sudoku.Parsers
 
         public BaseSudoku Parse(string filedata)
         {
-            Grid board = new Grid();
+            MainGrid board = new MainGrid();
             board.X = 100;
             board.Y = 100;
 

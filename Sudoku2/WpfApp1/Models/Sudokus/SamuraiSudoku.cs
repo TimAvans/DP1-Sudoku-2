@@ -9,7 +9,7 @@ namespace Sudoku.Models.Sudokus
 {
     public class SamuraiSudoku : BaseSudoku
     {
-        public SamuraiSudoku(List<Grid> grids) : base(grids) { }
+        public SamuraiSudoku(List<MainGrid> grids) : base(grids) { }
 
         public override bool Validate()
         {

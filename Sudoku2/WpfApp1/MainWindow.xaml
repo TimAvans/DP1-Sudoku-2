@@ -62,6 +62,7 @@
         <StackPanel>
             <Button Command="{Binding LoadSudokuCommand}" Content="Open Sudoku"></Button>
             <Button Command="{Binding ChangeStateCommand}" Content="{Binding StateText}"></Button>
+            <Button Command="{Binding ValidateCommand}" Content="Valideer sudoku"/>
         </StackPanel>
     </Canvas>
 </Window>

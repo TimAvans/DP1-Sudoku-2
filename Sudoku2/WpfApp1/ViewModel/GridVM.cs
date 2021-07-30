@@ -25,5 +25,10 @@ namespace Sudoku.ViewModel
                 _cells.Add(new CellVM(c));
             }
         }
+
+        public Grid getGrid()
+        {
+            return _grid;
+        }
     }
 }

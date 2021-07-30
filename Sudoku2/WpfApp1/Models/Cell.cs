@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WpfApp1.Visitor;
 
 namespace Sudoku.Models
 {
@@ -12,7 +13,7 @@ namespace Sudoku.Models
         DEFINITIVE,
         HELP
     }
-    public class Cell : ISudokuPart
+    public class Cell : ISudokuPart, IVisitable
     {
 
         public Cell(int value, int x, int y)
@@ -34,5 +35,10 @@ namespace Sudoku.Models
         public bool isValidated { get; set; }
         public int X { get; set; }
         public int Y { get; set; }
+
+        public void Accept(IVisitor visitor)
+        {
+            visitor.visitCell(this);
+        }
     }
 }
