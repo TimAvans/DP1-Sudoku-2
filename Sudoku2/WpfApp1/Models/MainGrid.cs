@@ -8,24 +8,19 @@ using WpfApp1.Visitor;
 
 namespace Sudoku.Models
 {
-    public class MainGrid : ISudokuPart, IVisitable
+    public class MainGrid : CompoundSudokuObject
     {
-        public MainGrid(int id)
+        public MainGrid(int id) : base()
         {
             ID = id;
-            Parts = new List<Grid>();
         }
 
-        public List<Grid> Parts { get; set; }
-        public bool isValidated { get; set; }
-        public int X { get; set; }
-        public int Y { get; set; }
-        
-        public int ID { get; set; }
-        public string ValidationMessage { get; set; }
+        public override string ValidationMessage { get { return "At maingrid " + ID; } }
 
-        public void Accept(IVisitor visitor)
+        public override void Accept(IVisitor visitor)
         {
+            base.Accept(visitor);
+
             visitor.visitMainGrid(this);
         }
     }

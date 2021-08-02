@@ -9,10 +9,5 @@ namespace Sudoku.Models.Sudokus
     public class NormalSudoku : BaseSudoku
     {
         public NormalSudoku(MainGrid grid) : base(grid) { }
-
-        public override bool Validate()
-        {
-            return false;
-        }
     }
 }

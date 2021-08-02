@@ -75,6 +75,7 @@
     <Compile Include="Factories\AbstractParserFactory.cs" />
     <Compile Include="Factories\IrregularSudokuParserFactory.cs" />
     <Compile Include="Factories\RegularSudokuParserFactory.cs" />
+    <Compile Include="Models\CompoundSudokuObject.cs" />
     <Compile Include="Models\MainGrid.cs" />
     <Compile Include="Models\Sudokus\BaseSudoku.cs" />
     <Compile Include="Models\Cell.cs" />
@@ -98,8 +99,8 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\SudokuVM.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Compile Include="Visitor\IVisitable.cs" />
     <Compile Include="Visitor\IVisitor.cs" />
+    <Compile Include="Visitor\ValidationMessageVisitor.cs" />
     <Compile Include="Visitor\ValidationVisitor.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

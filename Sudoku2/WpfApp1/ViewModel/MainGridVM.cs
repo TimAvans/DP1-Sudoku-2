@@ -16,7 +16,7 @@ namespace Sudoku.ViewModel
         private ObservableCollection<GridVM> _grids;
         public ObservableCollection<GridVM> Grids { get { return _grids; } set { _grids = value; RaisePropertyChanged("Grids"); } }
 
-        public string ValidationMessage { get { return _grid.ValidationMessage; } set { _grid.ValidationMessage = value; } }
+        public string ValidationMessage { get { return _grid.ValidationMessage; }}
 
         public int X { get { return _grid.X; } set { _grid.X = value; RaisePropertyChanged("X"); } }
         public int Y { get { return _grid.Y; } set { _grid.Y = value; RaisePropertyChanged("Y"); } }
@@ -26,7 +26,7 @@ namespace Sudoku.ViewModel
             _grid = grid;
             _grids = new ObservableCollection<GridVM>();
 
-            foreach (Grid g in grid.Parts)
+            foreach (Grid g in grid.Children)
             {
                 _grids.Add(new GridVM(g));
             }

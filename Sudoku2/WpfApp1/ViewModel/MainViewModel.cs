@@ -61,20 +61,7 @@ namespace Sudoku.ViewModel
         {
             if (Sudoku != null)
             {
-
                 ValidationVisitor v = new ValidationVisitor();
-                foreach (var maingrid in Sudoku.Grids)
-                {
-                    foreach (var grid in maingrid.Grids)
-                    {
-                        foreach (var cell in grid.Cells)
-                        {
-                            cell.getCell().Accept(v);
-                        }
-                        grid.getGrid().Accept(v);
-                    }
-                    maingrid.getGrid().Accept(v);
-                }
                 Sudoku.getSudoku().Accept(v);
 
                 LoadValidationMessages();
@@ -83,36 +70,7 @@ namespace Sudoku.ViewModel
 
         private void LoadValidationMessages()
         {
-            List<string> strings = new List<string>();
-            if (!Sudoku.getSudoku().isValidated)
-            {
-                foreach(MainGrid maingrid in Sudoku.getSudoku().Grids)
-                {
-                    if (!maingrid.isValidated)
-                    {
-                        strings.Add(maingrid.ValidationMessage);
-                        foreach(Grid grid in maingrid.Parts)
-                        {
-                            if (!grid.isValidated)
-                            {
-                                strings.Add(grid.ValidationMessage);
-                                foreach(Cell cell in grid.Parts)
-                                {
-                                    if (!cell.isValidated)
-                                    {
-                                        strings.Add(cell.ValidationMessage);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            } else
-            {
-                strings.Add("CONGRATULATIONS");
-                strings.Add("YOU HAVE COMPLETED THE SUDOKU!");
-            }
-            ValidationMessages = strings;
+            ValidationMessages = Sudoku.getSudoku().GetValidationMessages();
             RaisePropertyChanged("ValidationMessages");
         }
 

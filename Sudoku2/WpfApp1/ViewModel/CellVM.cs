@@ -37,7 +37,7 @@ namespace Sudoku.ViewModel
         public int X { get { return _x; } set { _x = value * Size; } }
         public int Y { get { return _y; } set { _y = value * Size; } }
 
-        public string ValidationMessage { get { return _cell.ValidationMessage; } set { _cell.ValidationMessage = value; } }
+        public string ValidationMessage { get { return _cell.ValidationMessage; }}
 
         public NumberType NumberState { get { return _cell.NumberState; } set { _cell.NumberState = value; } }
 

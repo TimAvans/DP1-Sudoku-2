@@ -87,7 +87,7 @@ namespace Sudoku.Parsers
                 }
 
                 Cell cell = new Cell((int)Char.GetNumericValue(c), sudokuX, sudokuY);
-                regions[regNumber].Parts.Add(cell);
+                regions[regNumber].Children.Add(cell);
 
                 //cell_data.Add(new Dictionary<string, int>
                 //{
@@ -101,7 +101,7 @@ namespace Sudoku.Parsers
             
             foreach(Grid grid in regions)
             {
-                board.Parts.Add(grid);
+                board.Children.Add(grid);
             }
 
             //foreach (Cell cell in cells)

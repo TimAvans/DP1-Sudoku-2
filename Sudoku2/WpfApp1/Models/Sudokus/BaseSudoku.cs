@@ -7,28 +7,24 @@ using WpfApp1.Visitor;
 
 namespace Sudoku.Models.Sudokus
 {
-    public abstract class BaseSudoku : IVisitable
-    {
-        public List<MainGrid> Grids { get; set; }
-        
-        public bool isValidated { get; set; }
-
-        public BaseSudoku(List<MainGrid> grids)
+    public abstract class BaseSudoku : CompoundSudokuObject
+    {       
+        public BaseSudoku(List<MainGrid> grids): base(new List<ISudokuPart>(grids))
         {
-            Grids = grids;
         }
 
-        public BaseSudoku(MainGrid grid)
+        public BaseSudoku(MainGrid grid) : base(grid)
         {
-            Grids = new List<MainGrid>();
-            Grids.Add(grid);
         }
 
-        public abstract bool Validate();
+        public override string ValidationMessage { get { return "Sudoku Incorrect: "; } }
 
-        public void Accept(IVisitor visitor)
+        public override void Accept(IVisitor visitor)
         {
+            base.Accept(visitor);
+
             visitor.visitSudoku(this);
         }
+
     }
 }

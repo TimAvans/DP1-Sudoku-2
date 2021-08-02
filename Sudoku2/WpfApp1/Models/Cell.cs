@@ -13,7 +13,7 @@ namespace Sudoku.Models
         DEFINITIVE,
         HELP
     }
-    public class Cell : ISudokuPart, IVisitable
+    public class Cell : ISudokuPart
     {
 
         public Cell(int value, int x, int y)
@@ -32,14 +32,19 @@ namespace Sudoku.Models
         }
         public int Value { get; set; }
         public NumberType NumberState { get; set; }
-        public bool isValidated { get; set; }
+        public bool IsValidated { get; set; }
         public int X { get; set; }
         public int Y { get; set; }
-        public string ValidationMessage { get; set; }
+        public string ValidationMessage { get {return "    ** Cell (" + X + ", " + Y + ") with value " + Value + " is not valid"; } }
 
         public void Accept(IVisitor visitor)
         {
             visitor.visitCell(this);
+        }
+
+        public List<string> GetValidationMessages()
+        {
+            return new List<string>() { ValidationMessage };
         }
     }
 }

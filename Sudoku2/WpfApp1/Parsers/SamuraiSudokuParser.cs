@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WpfApp1.Visitor;
 
 namespace Sudoku.Parsers
 {
@@ -85,21 +86,21 @@ namespace Sudoku.Parsers
                     Console.WriteLine("x: " + regX + "; y: " + regY + "; reg:" + regNumber);
 
                     Cell cell = new Cell((int)Char.GetNumericValue(c), sudokuX, sudokuY);
-                    regions[regNumber].Parts.Add(cell);
+                    regions[regNumber].Children.Add(cell);
                 }
 
                 boards.Add(new MainGrid(superRegNumber));
                 foreach (Grid grid in regions)
                 {
-                    boards[superRegNumber].Parts.Add(grid);
+                    boards[superRegNumber].Children.Add(grid);
                 }
                 superRegNumber++;
             }
 
-            boards[2].Parts[0] = boards[0].Parts[8];
-            boards[2].Parts[2] = boards[1].Parts[6];
-            boards[2].Parts[6] = boards[3].Parts[2];
-            boards[2].Parts[8] = boards[4].Parts[0];
+            boards[2].Children[0] = boards[0].Children[8];
+            boards[2].Children[2] = boards[1].Children[6];
+            boards[2].Children[6] = boards[3].Children[2];
+            boards[2].Children[8] = boards[4].Children[0];
 
             boards[0].X = 300;
             boards[0].Y = 100;

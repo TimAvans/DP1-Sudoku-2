@@ -21,7 +21,7 @@ namespace Sudoku.ViewModel
         {
             _sudoku = sudoku;
             _grids = new ObservableCollection<MainGridVM>();
-            foreach (MainGrid g in sudoku.Grids)
+            foreach (MainGrid g in sudoku.Children)
             {
                 _grids.Add(new MainGridVM(g));
             }

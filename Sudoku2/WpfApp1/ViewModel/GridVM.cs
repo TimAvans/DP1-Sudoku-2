@@ -16,13 +16,13 @@ namespace Sudoku.ViewModel
         private ObservableCollection<CellVM> _cells;
         public ObservableCollection<CellVM> Cells { get { return _cells; } set { _cells = value; RaisePropertyChanged("Cells"); } }
 
-        public string ValidationMessage { get { return _grid.ValidationMessage; } set { _grid.ValidationMessage = value; } }
+        public string ValidationMessage { get { return _grid.ValidationMessage; }}
 
         public GridVM(Grid grid) 
         {
             _grid = grid;
             _cells = new ObservableCollection<CellVM>();
-            foreach (Cell c in grid.Parts) 
+            foreach (Cell c in grid.Children) 
             {
                 _cells.Add(new CellVM(c));
             }

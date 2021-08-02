@@ -42,7 +42,7 @@ namespace Sudoku.Parsers
             for (int i = 1; i < data.Length; i++)
             {
                 Cell cell = new Cell((int)Char.GetNumericValue(data[i].Split('J')[0][0]), sudokuX, sudokuY);
-                regions[(int)Char.GetNumericValue(data[i].Split('J')[1][0])].Parts.Add(cell);
+                regions[(int)Char.GetNumericValue(data[i].Split('J')[1][0])].Children.Add(cell);
 
                 if (sudokuX + 1 == gridWidth)
                 {
@@ -57,7 +57,7 @@ namespace Sudoku.Parsers
 
             foreach (Grid grid in regions)
             {
-                board.Parts.Add(grid);
+                board.Children.Add(grid);
             }
 
             return new JigsawSudoku(board);

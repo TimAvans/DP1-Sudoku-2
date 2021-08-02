@@ -7,24 +7,19 @@ using WpfApp1.Visitor;
 
 namespace Sudoku.Models
 {
-    public class Grid : ISudokuPart, IVisitable
+    public class Grid : CompoundSudokuObject
     {
-        public Grid(int id)
+        public Grid(int id) : base()
         {
             ID = id;
-            Parts = new List<Cell>();
         }
 
-        public List<Cell> Parts { get; set; }
-        public bool isValidated { get; set; }
-        public int X { get; set; }
-        public int Y { get; set; }
-        public int ID { get; set; }
+        public override string ValidationMessage { get { return " -- At grid " + ID; } }
 
-        public string ValidationMessage { get; set; }
-
-        public void Accept(IVisitor visitor)
+        public override void Accept(IVisitor visitor)
         {
+            base.Accept(visitor);
+
             visitor.visitGrid(this);
         }
     }

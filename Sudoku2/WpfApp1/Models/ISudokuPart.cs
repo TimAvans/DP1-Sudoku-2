@@ -3,15 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WpfApp1.Visitor;
 
 namespace Sudoku.Models
 {
     public interface ISudokuPart
     {
-        bool isValidated { get; set; }
-        string ValidationMessage { get; set; }
+        bool IsValidated { get; set; }
+
+        string ValidationMessage { get; }
+
         int X { get; set; }
         int Y { get; set; }
+        void Accept(IVisitor visitor);
+        List<string> GetValidationMessages();
 
     }
 }

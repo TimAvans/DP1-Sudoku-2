@@ -11,10 +11,8 @@ namespace WpfApp1.Visitor
     public interface IVisitor
     {
         void visitCell(Cell cell);
-
         void visitGrid(Grid grid);
         void visitMainGrid(MainGrid maingrid);
-
         void visitSudoku(BaseSudoku sudoku);
     }
 }
