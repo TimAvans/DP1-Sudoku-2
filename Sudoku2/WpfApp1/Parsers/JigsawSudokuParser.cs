@@ -21,8 +21,8 @@ namespace Sudoku.Parsers
 
         public BaseSudoku Parse(string filedata)
         {
-            MainGrid board = new MainGrid();
-            board.X = 100;
+            MainGrid board = new MainGrid(0);
+            board.X = 300;
             board.Y = 100;
 
             string line = File.ReadAllLines(filedata)[0];
@@ -36,7 +36,7 @@ namespace Sudoku.Parsers
             Grid[] regions = new Grid[gridWidth];
             for (int i = 0; i < gridWidth; i++)
             {
-                regions[i] = new Grid();
+                regions[i] = new Grid(i);
             }
 
             for (int i = 1; i < data.Length; i++)

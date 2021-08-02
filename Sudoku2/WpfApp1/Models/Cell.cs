@@ -35,6 +35,7 @@ namespace Sudoku.Models
         public bool isValidated { get; set; }
         public int X { get; set; }
         public int Y { get; set; }
+        public string ValidationMessage { get; set; }
 
         public void Accept(IVisitor visitor)
         {

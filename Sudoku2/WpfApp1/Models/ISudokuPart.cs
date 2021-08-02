@@ -9,7 +9,7 @@ namespace Sudoku.Models
     public interface ISudokuPart
     {
         bool isValidated { get; set; }
-
+        string ValidationMessage { get; set; }
         int X { get; set; }
         int Y { get; set; }
 

@@ -6,6 +6,7 @@ using Sudoku.Models;
 using Sudoku.Models.Sudokus;
 using Sudoku.Parsers;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows.Input;
 using WpfApp1.State;
@@ -18,6 +19,7 @@ namespace Sudoku.ViewModel
         public SudokuVM Sudoku { get; set; }
 
         public string StateText { get; set; }
+        public List<string> ValidationMessages { get; set; }
 
         public ICommand LoadSudokuCommand { get; set; }
         public ICommand ChangeStateCommand { get; set; }
@@ -31,6 +33,8 @@ namespace Sudoku.ViewModel
             LoadSudokuCommand = new RelayCommand(LoadSudoku);
             ChangeStateCommand = new RelayCommand(ChangeGameState);
             ValidateCommand = new RelayCommand(ValidateSudoku);
+
+            ValidationMessages = new List<string>();
 
             StateText = "Change To Definitive State";
 
@@ -55,20 +59,61 @@ namespace Sudoku.ViewModel
         
         private void ValidateSudoku()
         {
-            ValidationVisitor v = new ValidationVisitor();
-            foreach (var maingrid in Sudoku.Grids)
+            if (Sudoku != null)
             {
-                foreach (var grid in maingrid.Grids)
+
+                ValidationVisitor v = new ValidationVisitor();
+                foreach (var maingrid in Sudoku.Grids)
                 {
-                    foreach (var cell in grid.Cells)
+                    foreach (var grid in maingrid.Grids)
                     {
-                        cell.getCell().Accept(v);
+                        foreach (var cell in grid.Cells)
+                        {
+                            cell.getCell().Accept(v);
+                        }
+                        grid.getGrid().Accept(v);
                     }
-                    grid.getGrid().Accept(v);
+                    maingrid.getGrid().Accept(v);
                 }
-                maingrid.getGrid().Accept(v);
+                Sudoku.getSudoku().Accept(v);
+
+                LoadValidationMessages();
             }
-            Sudoku.getSudoku().Accept(v);
+        }
+
+        private void LoadValidationMessages()
+        {
+            List<string> strings = new List<string>();
+            if (!Sudoku.getSudoku().isValidated)
+            {
+                foreach(MainGrid maingrid in Sudoku.getSudoku().Grids)
+                {
+                    if (!maingrid.isValidated)
+                    {
+                        strings.Add(maingrid.ValidationMessage);
+                        foreach(Grid grid in maingrid.Parts)
+                        {
+                            if (!grid.isValidated)
+                            {
+                                strings.Add(grid.ValidationMessage);
+                                foreach(Cell cell in grid.Parts)
+                                {
+                                    if (!cell.isValidated)
+                                    {
+                                        strings.Add(cell.ValidationMessage);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            } else
+            {
+                strings.Add("CONGRATULATIONS");
+                strings.Add("YOU HAVE COMPLETED THE SUDOKU!");
+            }
+            ValidationMessages = strings;
+            RaisePropertyChanged("ValidationMessages");
         }
 
         private void LoadSudoku()

@@ -8,7 +8,7 @@
         Title="MainWindow"
         WindowState="Maximized"
         DataContext="{Binding Main, Source={StaticResource Locator}}">
-    <Canvas Width="800" Height="800" Background="Transparent">
+    <Canvas Background="Transparent">
         <ItemsControl ItemsSource="{Binding Sudoku.Grids, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -62,7 +62,8 @@
         <StackPanel>
             <Button Command="{Binding LoadSudokuCommand}" Content="Open Sudoku"></Button>
             <Button Command="{Binding ChangeStateCommand}" Content="{Binding StateText}"></Button>
-            <Button Command="{Binding ValidateCommand}" Content="Valideer sudoku"/>
+            <Button Command="{Binding ValidateCommand}" Content="Validate Sudoku"/>
+            <ListView MaxHeight="500" ItemsSource="{Binding ValidationMessages}" ScrollViewer.CanContentScroll="true"></ListView>
         </StackPanel>
     </Canvas>
 </Window>

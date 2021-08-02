@@ -10,22 +10,19 @@ namespace Sudoku.Models
 {
     public class MainGrid : ISudokuPart, IVisitable
     {
-        public MainGrid()
+        public MainGrid(int id)
         {
+            ID = id;
             Parts = new List<Grid>();
-        }
-
-        public MainGrid(int x, int y)
-        {
-            Parts = new List<Grid>();
-            X = x;
-            Y = y;
         }
 
         public List<Grid> Parts { get; set; }
         public bool isValidated { get; set; }
         public int X { get; set; }
         public int Y { get; set; }
+        
+        public int ID { get; set; }
+        public string ValidationMessage { get; set; }
 
         public void Accept(IVisitor visitor)
         {

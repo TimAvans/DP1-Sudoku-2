@@ -19,12 +19,14 @@ namespace WpfApp1.Visitor
             else 
             {
                 cell.isValidated = false;
+                cell.ValidationMessage = "    ** Cell (" + cell.X + ", " + cell.Y + ") with value " + cell.Value + " is not valid" ;
             }
             Console.WriteLine("Cell validation: " + cell.isValidated.ToString());
         }
 
         public void visitGrid(Grid grid)
         {
+            grid.isValidated = true;
             List<int> integers = new List<int>();
 
             foreach (var cell in grid.Parts)
@@ -38,22 +40,22 @@ namespace WpfApp1.Visitor
                     else
                     {
                         grid.isValidated = false;
+                        grid.ValidationMessage = " -- At grid " + grid.ID;
                         cell.isValidated = false;
-                        return;
                     }
                 }
                 else 
                 {
                     grid.isValidated = false;
-                    return;
+                    grid.ValidationMessage = " -- At grid " + grid.ID;
                 }
             }
-            grid.isValidated = true;
             Console.WriteLine("Grid validation: " + grid.isValidated.ToString());
         }
 
         public void visitMainGrid(MainGrid maingrid)
         {
+            maingrid.isValidated = true;
             foreach (var grid in maingrid.Parts)
             {
                 Dictionary<int, List<int>> integersX = new Dictionary<int, List<int>>();
@@ -80,7 +82,7 @@ namespace WpfApp1.Visitor
                             cell.isValidated = false;
                             grid.isValidated = false;
                             maingrid.isValidated = false;
-                            return;
+                            maingrid.ValidationMessage = "At maingrid " + maingrid.ID;
                         }
 
                         if (!integersY[cell.Y].Contains(cell.Value))
@@ -92,31 +94,29 @@ namespace WpfApp1.Visitor
                             cell.isValidated = false;
                             grid.isValidated = false;
                             maingrid.isValidated = false;
-                            return;
+                            maingrid.ValidationMessage = "At maingrid " + maingrid.ID;
                         }
                     }
                 }
                 else
                 {
                     maingrid.isValidated = false;
-                    return; 
-                }          
+                    maingrid.ValidationMessage = "At maingrid " + maingrid.ID;
+                }
             }
-            maingrid.isValidated = true;
             Console.WriteLine("MainGrid validation: " + maingrid.isValidated.ToString());
         }
 
         public void visitSudoku(BaseSudoku sudoku)
         {
+            sudoku.isValidated = true;
             foreach (var maingrid in sudoku.Grids)
             {
                 if (!maingrid.isValidated)
                 {
                     sudoku.isValidated = false;
-                    return;
                 }
             }
-            sudoku.isValidated = true;
             Console.WriteLine("Sudoku validation: " + sudoku.isValidated.ToString());
         }
     }

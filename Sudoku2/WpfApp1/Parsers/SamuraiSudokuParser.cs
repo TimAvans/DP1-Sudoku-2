@@ -44,7 +44,7 @@ namespace Sudoku.Parsers
                 Grid[] regions = new Grid[gridWidth];
                 for (int i = 0; i < gridWidth; i++)
                 {
-                    regions[i] = new Grid();
+                    regions[i] = new Grid(i);
                 }
 
                 foreach (char c in line)
@@ -88,7 +88,7 @@ namespace Sudoku.Parsers
                     regions[regNumber].Parts.Add(cell);
                 }
 
-                boards.Add(new MainGrid());
+                boards.Add(new MainGrid(superRegNumber));
                 foreach (Grid grid in regions)
                 {
                     boards[superRegNumber].Parts.Add(grid);
@@ -101,19 +101,19 @@ namespace Sudoku.Parsers
             boards[2].Parts[6] = boards[3].Parts[2];
             boards[2].Parts[8] = boards[4].Parts[0];
 
-            boards[0].X = 100;
+            boards[0].X = 300;
             boards[0].Y = 100;
 
-            boards[1].X = 460;
+            boards[1].X = 660;
             boards[1].Y = 100;
 
-            boards[2].X = 280;
+            boards[2].X = 480;
             boards[2].Y = 280;
 
-            boards[3].X = 100;
+            boards[3].X = 300;
             boards[3].Y = 460;
 
-            boards[4].X = 460;
+            boards[4].X = 660;
             boards[4].Y = 460;
 
             return new SamuraiSudoku(boards);

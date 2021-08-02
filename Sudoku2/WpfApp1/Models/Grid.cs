@@ -9,22 +9,19 @@ namespace Sudoku.Models
 {
     public class Grid : ISudokuPart, IVisitable
     {
-        public Grid()
+        public Grid(int id)
         {
+            ID = id;
             Parts = new List<Cell>();
-        }
-
-        public Grid(int x, int y)
-        {
-            Parts = new List<Cell>();
-            X = x;
-            Y = y;
         }
 
         public List<Cell> Parts { get; set; }
         public bool isValidated { get; set; }
         public int X { get; set; }
         public int Y { get; set; }
+        public int ID { get; set; }
+
+        public string ValidationMessage { get; set; }
 
         public void Accept(IVisitor visitor)
         {
