@@ -85,7 +85,7 @@ namespace Sudoku.Parsers
 
                     Console.WriteLine("x: " + regX + "; y: " + regY + "; reg:" + regNumber);
 
-                    Cell cell = new Cell((int)Char.GetNumericValue(c), sudokuX, sudokuY);
+                    Cell cell = new Cell((int)Char.GetNumericValue(c), gridWidth, sudokuX, sudokuY);
                     regions[regNumber].Children.Add(cell);
                 }
 

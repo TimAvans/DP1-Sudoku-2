@@ -100,7 +100,6 @@
     <Compile Include="ViewModel\SudokuVM.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="Visitor\IVisitor.cs" />
-    <Compile Include="Visitor\ValidationMessageVisitor.cs" />
     <Compile Include="Visitor\ValidationVisitor.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

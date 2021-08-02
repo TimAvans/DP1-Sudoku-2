@@ -31,10 +31,5 @@ namespace Sudoku.ViewModel
                 _grids.Add(new GridVM(g));
             }
         }
-
-        public MainGrid getGrid() 
-        {
-            return _grid;
-        }
     }
 }

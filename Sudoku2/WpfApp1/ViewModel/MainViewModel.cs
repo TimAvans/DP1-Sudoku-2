@@ -17,10 +17,8 @@ namespace Sudoku.ViewModel
     public class MainViewModel : ViewModelBase
     {
         public SudokuVM Sudoku { get; set; }
-
         public string StateText { get; set; }
         public List<string> ValidationMessages { get; set; }
-
         public ICommand LoadSudokuCommand { get; set; }
         public ICommand ChangeStateCommand { get; set; }
         public ICommand ValidateCommand { get; set; }

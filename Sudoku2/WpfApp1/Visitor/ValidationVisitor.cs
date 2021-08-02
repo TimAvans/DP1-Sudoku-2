@@ -12,7 +12,7 @@ namespace WpfApp1.Visitor
     {
         public void visitCell(Cell cell)
         {
-            if (cell.Value <= 9 && cell.Value >= 1)
+            if (cell.Value <= cell.MaxValue && cell.Value >= 1)
             {
                 cell.IsValidated = true;
             }

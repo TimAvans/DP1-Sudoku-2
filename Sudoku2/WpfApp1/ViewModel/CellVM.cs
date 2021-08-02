@@ -24,7 +24,7 @@ namespace Sudoku.ViewModel
                 int temp;
                 if (Int32.TryParse(value, out temp))
                 {
-                    if (temp <= 9 && temp >= 0)
+                    if (temp <= _cell.MaxValue && temp >= 0)
                     {
                         _cell.Value = StateManager.Instance().CurrentState.ChangeNumber(_cell, temp); ;
                         RaisePropertyChanged("Value");
@@ -37,22 +37,14 @@ namespace Sudoku.ViewModel
         public int X { get { return _x; } set { _x = value * Size; } }
         public int Y { get { return _y; } set { _y = value * Size; } }
 
-        public string ValidationMessage { get { return _cell.ValidationMessage; }}
-
         public NumberType NumberState { get { return _cell.NumberState; } set { _cell.NumberState = value; } }
 
         public int Size{ get { return 30; } }
-
         public CellVM(Cell cell) 
         {
             _cell = cell;
             X = cell.X;
             Y = cell.Y;
-        }
-
-        public Cell getCell()      
-        {
-            return _cell;
         }
     }
 }

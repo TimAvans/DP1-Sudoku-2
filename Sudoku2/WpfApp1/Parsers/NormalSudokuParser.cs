@@ -86,7 +86,7 @@ namespace Sudoku.Parsers
                     sudokuX++;
                 }
 
-                Cell cell = new Cell((int)Char.GetNumericValue(c), sudokuX, sudokuY);
+                Cell cell = new Cell((int)Char.GetNumericValue(c), gridWidth, sudokuX, sudokuY);
                 regions[regNumber].Children.Add(cell);
 
                 //cell_data.Add(new Dictionary<string, int>

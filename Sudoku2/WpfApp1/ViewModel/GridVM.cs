@@ -16,8 +16,6 @@ namespace Sudoku.ViewModel
         private ObservableCollection<CellVM> _cells;
         public ObservableCollection<CellVM> Cells { get { return _cells; } set { _cells = value; RaisePropertyChanged("Cells"); } }
 
-        public string ValidationMessage { get { return _grid.ValidationMessage; }}
-
         public GridVM(Grid grid) 
         {
             _grid = grid;
@@ -26,11 +24,6 @@ namespace Sudoku.ViewModel
             {
                 _cells.Add(new CellVM(c));
             }
-        }
-
-        public Grid getGrid()
-        {
-            return _grid;
         }
     }
 }
