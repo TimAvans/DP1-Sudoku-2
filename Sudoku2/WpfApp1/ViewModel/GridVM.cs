@@ -15,7 +15,6 @@ namespace Sudoku.ViewModel
 
         private ObservableCollection<CellVM> _cells;
         public ObservableCollection<CellVM> Cells { get { return _cells; } set { _cells = value; RaisePropertyChanged("Cells"); } }
-
         public GridVM(Grid grid) 
         {
             _grid = grid;

@@ -25,6 +25,18 @@ namespace Sudoku.Parsers
             board.X = 300;
             board.Y = 100;
 
+            string[] colors = new string[] {
+            "blue",
+            "green",
+            "yellow",
+            "red",
+            "orange",
+            "cyan",
+            "purple",
+            "pink",
+            "brown"
+            };
+
             string line = File.ReadAllLines(filedata)[0];
 
             string[] data = line.Split('=');
@@ -41,8 +53,9 @@ namespace Sudoku.Parsers
 
             for (int i = 1; i < data.Length; i++)
             {
-                Cell cell = new Cell((int)Char.GetNumericValue(data[i].Split('J')[0][0]), gridWidth, sudokuX, sudokuY);
-                regions[(int)Char.GetNumericValue(data[i].Split('J')[1][0])].Children.Add(cell);
+                int regNumber = (int)Char.GetNumericValue(data[i].Split('J')[1][0]);
+                Cell cell = new Cell((int)Char.GetNumericValue(data[i].Split('J')[0][0]), gridWidth, sudokuX, sudokuY, colors[regNumber]);
+                regions[regNumber].Children.Add(cell);
 
                 if (sudokuX + 1 == gridWidth)
                 {

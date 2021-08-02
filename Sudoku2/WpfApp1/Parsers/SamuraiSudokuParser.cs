@@ -25,6 +25,18 @@ namespace Sudoku.Parsers
 
             List<MainGrid> boards = new List<MainGrid>();
 
+            string[] colors = new string[] {
+            "blue",
+            "green",
+            "yellow",
+            "red",
+            "orange",
+            "cyan",
+            "purple",
+            "pink",
+            "brown"
+            };
+
             int superRegNumber = 0;
 
             foreach (string line in file)
@@ -85,7 +97,7 @@ namespace Sudoku.Parsers
 
                     Console.WriteLine("x: " + regX + "; y: " + regY + "; reg:" + regNumber);
 
-                    Cell cell = new Cell((int)Char.GetNumericValue(c), gridWidth, sudokuX, sudokuY);
+                    Cell cell = new Cell((int)Char.GetNumericValue(c), gridWidth, sudokuX, sudokuY, colors[regNumber]);
                     regions[regNumber].Children.Add(cell);
                 }
 

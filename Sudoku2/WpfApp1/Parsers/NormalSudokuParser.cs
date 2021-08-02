@@ -23,6 +23,17 @@ namespace Sudoku.Parsers
         {
             string line = File.ReadAllLines(filedata)[0];
 
+            string[] colors = new string[] {
+            "blue",
+            "green",
+            "yellow",
+            "red",
+            "orange",
+            "cyan",
+            "purple",
+            "pink",
+            "brown"
+            };
 
             MainGrid board = new MainGrid(0);
             board.X = 300;
@@ -86,7 +97,7 @@ namespace Sudoku.Parsers
                     sudokuX++;
                 }
 
-                Cell cell = new Cell((int)Char.GetNumericValue(c), gridWidth, sudokuX, sudokuY);
+                Cell cell = new Cell((int)Char.GetNumericValue(c), gridWidth, sudokuX, sudokuY, colors[regNumber]);
                 regions[regNumber].Children.Add(cell);
 
                 //cell_data.Add(new Dictionary<string, int>

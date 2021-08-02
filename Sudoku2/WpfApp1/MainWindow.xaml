@@ -46,8 +46,8 @@
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
                                             <Canvas>
-                                                <TextBox Foreground="blue" Background="Gray" Width="{Binding Size}" Height="{Binding Size}" Text="{Binding Value}" FontSize="12"/>
-                                                <Rectangle Width="{Binding Size}" Height="{Binding Size}" Stroke="Black">
+                                                <TextBox Foreground="black" Background="transparent" Width="{Binding Size}" Height="{Binding Size}" Text="{Binding Value}" FontSize="12"/>
+                                                <Rectangle Width="{Binding Size}" Height="{Binding Size}" Stroke="{Binding Color}">
                                                 </Rectangle>
                                             </Canvas>
                                         </DataTemplate>

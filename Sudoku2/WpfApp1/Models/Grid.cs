@@ -9,6 +9,7 @@ namespace Sudoku.Models
 {
     public class Grid : CompoundSudokuObject
     {
+
         public Grid(int id) : base()
         {
             ID = id;

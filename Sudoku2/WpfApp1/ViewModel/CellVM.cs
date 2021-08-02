@@ -37,9 +37,11 @@ namespace Sudoku.ViewModel
         public int X { get { return _x; } set { _x = value * Size; } }
         public int Y { get { return _y; } set { _y = value * Size; } }
 
-        public NumberType NumberState { get { return _cell.NumberState; } set { _cell.NumberState = value; } }
+        public NumberType NumberState { get { return _cell.NumberState; } set { _cell.NumberState = value; RaisePropertyChanged("NumberState"); RaisePropertyChanged("ForegroundColor") ; } }
 
         public int Size{ get { return 30; } }
+
+        public string Color { get { return _cell.Color; } set { _cell.Color = value; } }
         public CellVM(Cell cell) 
         {
             _cell = cell;

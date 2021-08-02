@@ -16,12 +16,13 @@ namespace Sudoku.Models
     public class Cell : ISudokuPart
     {
 
-        public Cell(int value, int maxvalue, int x, int y)
+        public Cell(int value, int maxvalue, int x, int y, string color)
         {
             Value = value;
             MaxValue = maxvalue;
             X = x;
             Y = y;
+            Color = color;
 
             if (Value > 0)
             {
@@ -33,6 +34,7 @@ namespace Sudoku.Models
         }
         public int Value { get; set; }
         public int MaxValue { get; set; }
+        public string Color { get; set; }
         public NumberType NumberState { get; set; }
         public bool IsValidated { get; set; }
         public int X { get; set; }
