@@ -52,8 +52,15 @@ namespace Sudoku.Models
                 messages.Add(ValidationMessage);
                 foreach(ISudokuPart child in Children)
                 {
-                    messages.AddRange(child.GetValidationMessages());
+                    if (!child.IsValidated)
+                    {
+                        messages.AddRange(child.GetValidationMessages());
+                    }
                 }
+            } else
+            {
+                messages.Add("CONGRATULATIONS");
+                messages.Add("YOU COMPLETED THE SUDOKU!");
             }
 
             return messages;
