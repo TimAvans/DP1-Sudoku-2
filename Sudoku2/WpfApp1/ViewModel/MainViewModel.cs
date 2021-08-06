@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Input;
+using WpfApp1.Commands;
 using WpfApp1.State;
 using WpfApp1.Visitor;
 
@@ -16,86 +17,81 @@ namespace Sudoku.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
-        public SudokuVM Sudoku { get; set; }
-        public string StateText { get; set; }
-        public List<string> ValidationMessages { get; set; }
+        private SudokuVM _sudoku;
+        public SudokuVM Sudoku { get { return _sudoku; } set { _sudoku = value; RaisePropertyChanged("Sudoku"); } }
+       
+        private string _stateText;
+        public string StateText { get { return _stateText; } set { _stateText = value; RaisePropertyChanged("StateText"); } }
+        
+        private List<string> _validationMessages;
+        public List<string> ValidationMessages { get { return _validationMessages; } set { _validationMessages = value; RaisePropertyChanged("ValidationMessages"); } }
         public ICommand LoadSudokuCommand { get; set; }
         public ICommand ChangeStateCommand { get; set; }
         public ICommand ValidateCommand { get; set; }
 
-        private ConcreteParserFactory _concreteParserFactory;
-
-        private StateManager _stateManager;
         public MainViewModel()
         {
-            LoadSudokuCommand = new RelayCommand(LoadSudoku);
+            //Functie creeer commands, return dictionary met commands.
+            //Dan maak relay commands.
+            var commands = CreateCommands();
+
             ChangeStateCommand = new RelayCommand(ChangeGameState);
             ValidateCommand = new RelayCommand(ValidateSudoku);
+            LoadSudokuCommand = new RelayCommand(commands["Openfile"].Execute);
 
             ValidationMessages = new List<string>();
 
             StateText = "Change To Definitive State";
-
-            _concreteParserFactory = new ConcreteParserFactory();
-            _stateManager = StateManager.Instance();
         }
 
         private void ChangeGameState()
         {
-            if (StateText.Contains("Definitive"))
-            {
-                _stateManager.ChangeState(new DefinitiveState());
-                StateText = "Change To Help State";
-            } else
-            {
-                _stateManager.ChangeState(new HelpState());
-                StateText = "Change To Definitive State";
-            }
 
-            RaisePropertyChanged("StateText");
-        }        
-        
-        private void ValidateSudoku()
-        {
-            if (Sudoku != null)
-            {
-                ValidationVisitor v = new ValidationVisitor();
-                Sudoku.getSudoku().Accept(v);
 
-                LoadValidationMessages();
-            }
         }
 
-        private void LoadValidationMessages()
+        private void solvesudoku() 
         {
-            ValidationMessages = Sudoku.getSudoku().GetValidationMessages();
-            RaisePropertyChanged("ValidationMessages");
+            //Pak het bord.
+            //Loop door alle grids.
+            //Voor iedere grid loop door de cellen.
+            //Check bij ieder cel of deze ingevuld is of niet.
+            //Is het niet ingevuld zet het eerste nummer er neer, check of de sudoku nog klopt.
+            //Klopt de sudoku ga verder naar de volgende cell, klopt de sudoku niet ga terug en pas de vorige cel aan.
+
+
+            //Zie pseudo code:
+            //https://bb.avans.nl/bbcswebdav/pid-2087828-dt-content-rid-69825701_1/courses/AII-2021D-INDP1/Practicumopdracht_DP1_2021_Sudoku.pdf
+
+            //find = find_empty(bo)
+            //if not find:
+            //            return True
+            //else:
+            //    row, col = find
+
+            //for i in range(1, 10):
+            //    if valid(bo, i, (row, col)):
+            //        bo[row][col] = i
+            //        if solve(bo):
+            //            return True
+            //        bo[row][col] = 0
+            //return False
+        }
+
+        private void ValidateSudoku()
+        {
+
+        }
+
+
+
+        private Dictionary<string, ICustomCommand> CreateCommands() 
+        {
+            return new Dictionary<string, ICustomCommand>() { {"Openfile", new OpenFileCommand(this) } };
         }
 
         private void LoadSudoku()
         {
-            string workingDirectory = Environment.CurrentDirectory;
-            OpenFileDialog dialog = new OpenFileDialog();
-            dialog.InitialDirectory = Directory.GetParent(workingDirectory).Parent.FullName + "\\Files";
-            if (dialog.ShowDialog() == true)
-            {
-                BaseSudoku sudoku;
-                if (dialog.FileName.Contains("4x4") || dialog.FileName.Contains("6x6") || dialog.FileName.Contains("9x9"))
-                {
-                    RegularSudokuParserFactory parserFactory = (RegularSudokuParserFactory)_concreteParserFactory.Create("NormalSudoku");
-                    IRegularSudokuParser parser = parserFactory.Create("normal");
-                    sudoku = parser.Parse(dialog.FileName);
-                }
-                else
-                {
-                    IrregularSudokuParserFactory parserFactory = (IrregularSudokuParserFactory)_concreteParserFactory.Create("NotNormalSudoku");
-                    IIrregularSudokuParser parser = parserFactory.Create(dialog.FileName.Split('.')[1]);
-                    sudoku = parser.Parse(dialog.FileName);
-                }
-
-                Sudoku = new SudokuVM(sudoku);
-                RaisePropertyChanged("Sudoku");
-            }
         }
     }
 }

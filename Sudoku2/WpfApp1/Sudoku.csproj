@@ -70,6 +70,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\ICustomCommand.cs" />
+    <Compile Include="Commands\OpenFileCommand.cs" />
     <Compile Include="Factories\IAbstractFactory.cs" />
     <Compile Include="Factories\ConcreteParserFactory.cs" />
     <Compile Include="Factories\AbstractParserFactory.cs" />
