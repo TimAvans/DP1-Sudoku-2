@@ -60,9 +60,9 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
         <StackPanel>
-            <Button Command="{Binding LoadSudokuCommand}" Content="Open Sudoku"></Button>
-            <Button Command="{Binding ChangeStateCommand}" Content="{Binding StateText}"></Button>
-            <Button Command="{Binding ValidateCommand}" Content="Validate Sudoku"/>
+            <Button Command="{Binding ExecuteCustomCommand}" CommandParameter="LoadSudoku" Content="Open Sudoku"></Button>
+            <Button Command="{Binding ExecuteCustomCommand}" CommandParameter="ChangeState" Content="{Binding StateText}"></Button>
+            <Button Command="{Binding ExecuteCustomCommand}" CommandParameter="Validate" Content="Validate Sudoku"/>
             <ListView MaxHeight="500" ItemsSource="{Binding ValidationMessages}" ScrollViewer.CanContentScroll="true"></ListView>
         </StackPanel>
     </Canvas>

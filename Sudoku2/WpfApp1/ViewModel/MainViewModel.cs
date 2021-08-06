@@ -25,18 +25,25 @@ namespace Sudoku.ViewModel
         
         private List<string> _validationMessages;
         public List<string> ValidationMessages { get { return _validationMessages; } set { _validationMessages = value; RaisePropertyChanged("ValidationMessages"); } }
-        public ICommand LoadSudokuCommand { get; set; }
-        public ICommand ChangeStateCommand { get; set; }
-        public ICommand ValidateCommand { get; set; }
+        public ICommand ExecuteCustomCommand { get; set; }
 
+        private Dictionary<string, ICustomCommand> _commands;
         public MainViewModel()
         {
-            //Functie creeer commands, return dictionary met commands.
-            //Dan maak relay commands.
-            var commands = CreateCommands();
+
+            CreateCommands();
+
             ValidationMessages = new List<string>();
 
+            ExecuteCustomCommand = new RelayCommand<string>(ExecuteCommand);
+
             StateText = "Change To Definitive State";
+
+        }
+
+        private void ExecuteCommand(string command)
+        {
+            _commands[command].Execute();
         }
 
         private void solvesudoku() 
@@ -67,9 +74,14 @@ namespace Sudoku.ViewModel
             //return False
         }
 
-        private Dictionary<string, ICustomCommand> CreateCommands() 
+        private void CreateCommands() 
         {
-            return new Dictionary<string, ICustomCommand>() { {"Openfile", new OpenFileCommand(this) } };
+            _commands = new Dictionary<string, ICustomCommand>() {  
+                { "LoadSudoku", new OpenFileCommand(this) } ,
+                //{ "ChangeState", new ChangeGameStateCommand(this)}
+                //{ "Validate", new ValidateCommand(this)}
+            };
+
         }
     }
 }
