@@ -34,20 +34,9 @@ namespace Sudoku.ViewModel
             //Functie creeer commands, return dictionary met commands.
             //Dan maak relay commands.
             var commands = CreateCommands();
-
-            ChangeStateCommand = new RelayCommand(ChangeGameState);
-            ValidateCommand = new RelayCommand(ValidateSudoku);
-            LoadSudokuCommand = new RelayCommand(commands["Openfile"].Execute);
-
             ValidationMessages = new List<string>();
 
             StateText = "Change To Definitive State";
-        }
-
-        private void ChangeGameState()
-        {
-
-
         }
 
         private void solvesudoku() 
@@ -78,20 +67,9 @@ namespace Sudoku.ViewModel
             //return False
         }
 
-        private void ValidateSudoku()
-        {
-
-        }
-
-
-
         private Dictionary<string, ICustomCommand> CreateCommands() 
         {
             return new Dictionary<string, ICustomCommand>() { {"Openfile", new OpenFileCommand(this) } };
-        }
-
-        private void LoadSudoku()
-        {
         }
     }
 }
