@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WpfApp1.State
+namespace Sudoku.State
 {
     public class StateManager{
         public State CurrentState { get; set; }

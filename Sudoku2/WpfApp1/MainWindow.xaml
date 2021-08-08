@@ -63,6 +63,7 @@
             <Button Command="{Binding ExecuteCustomCommand}" CommandParameter="LoadSudoku" Content="Open Sudoku"></Button>
             <Button Command="{Binding ExecuteCustomCommand}" CommandParameter="ChangeState" Content="{Binding StateText}"></Button>
             <Button Command="{Binding ExecuteCustomCommand}" CommandParameter="Validate" Content="Validate Sudoku"/>
+            <Button Command="{Binding ExecuteCustomCommand}" CommandParameter="Solve" Content="Solve Sudoku"/>
             <ListView MaxHeight="500" ItemsSource="{Binding ValidationMessages}" ScrollViewer.CanContentScroll="true"></ListView>
         </StackPanel>
     </Canvas>

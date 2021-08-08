@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WpfApp1.Commands
+namespace Sudoku.Commands
 {
     public interface ICustomCommand
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WpfApp1.Visitor;
+using Sudoku.Visitor;
 
 namespace Sudoku.Models.Sudokus
 {

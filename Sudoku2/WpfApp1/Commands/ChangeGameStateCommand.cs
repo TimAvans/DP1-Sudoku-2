@@ -4,30 +4,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WpfApp1.State;
+using Sudoku.State;
 
-namespace WpfApp1.Commands
+namespace Sudoku.Commands
 {
     public class ChangeGameStateCommand : ICustomCommand
     {
-        MainViewModel mvm;
+        private MainViewModel _mvm;
 
         public ChangeGameStateCommand(MainViewModel mvm) 
         {
-            this.mvm = mvm;
+            _mvm = mvm;
         }
 
         public void Execute()
         {
-            if (mvm.StateText.Contains("Definitive"))
+            if (_mvm.StateText.Contains("Definitive"))
             {
                 StateManager.Instance().ChangeState(new DefinitiveState());
-                mvm.StateText = "Change To Help State";
+                _mvm.StateText = "Change To Help State";
             }
             else
             {
                 StateManager.Instance().ChangeState(new HelpState());
-                mvm.StateText = "Change To Definitive State";
+                _mvm.StateText = "Change To Definitive State";
             }
         }
     }

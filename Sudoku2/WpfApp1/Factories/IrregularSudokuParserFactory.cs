@@ -15,7 +15,6 @@ namespace Sudoku.Factories
         public Dictionary<string, IIrregularSudokuParser> Types { get; set; }
         public const string TYPE = "NotNormalSudoku";
 
-
         public IrregularSudokuParserFactory() { 
             Types = new Dictionary<string, IIrregularSudokuParser>();
             LoadTypes();

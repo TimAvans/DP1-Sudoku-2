@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WpfApp1.Visitor;
+using Sudoku.Visitor;
 
 namespace Sudoku.Parsers
 {

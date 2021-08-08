@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WpfApp1.State
+namespace Sudoku.State
 {
     public abstract class State
     {

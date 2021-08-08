@@ -1,18 +1,12 @@
-﻿using System;
+﻿using Sudoku.Visitor;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WpfApp1.Visitor;
 
 namespace Sudoku.Models
 {
-    public enum NumberType
-    {
-        START,
-        DEFINITIVE,
-        HELP
-    }
     public class Cell : ISudokuPart
     {
 

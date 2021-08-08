@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Sudoku.Models;
-using WpfApp1.State;
+using Sudoku.State;
 
 namespace Sudoku.ViewModel
 {

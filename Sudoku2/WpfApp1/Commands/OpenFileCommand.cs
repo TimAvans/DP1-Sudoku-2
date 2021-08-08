@@ -10,16 +10,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WpfApp1.Commands
+namespace Sudoku.Commands
 {
     public class OpenFileCommand : ICustomCommand
     {
-        ConcreteParserFactory _concreteParserFactory;
-        MainViewModel mvm;
+        private ConcreteParserFactory _concreteParserFactory;
+        private MainViewModel _mvm;
         public OpenFileCommand(MainViewModel mvm) 
         {
             _concreteParserFactory = new ConcreteParserFactory();
-            this.mvm = mvm;
+            this._mvm = mvm;
         }
 
         public void Execute()
@@ -43,7 +43,7 @@ namespace WpfApp1.Commands
                     sudoku = parser.Parse(dialog.FileName);
                 }
 
-                mvm.Sudoku = new SudokuVM(sudoku);
+                _mvm.Sudoku = new SudokuVM(sudoku);
             }
         }
     }

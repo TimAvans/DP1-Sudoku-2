@@ -70,13 +70,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\ChangeGameStateCommand.cs" />
     <Compile Include="Commands\ICustomCommand.cs" />
     <Compile Include="Commands\OpenFileCommand.cs" />
+    <Compile Include="Commands\SolveCommand.cs" />
+    <Compile Include="Commands\ValidateCommand.cs" />
     <Compile Include="Factories\IAbstractFactory.cs" />
     <Compile Include="Factories\ConcreteParserFactory.cs" />
     <Compile Include="Factories\AbstractParserFactory.cs" />
     <Compile Include="Factories\IrregularSudokuParserFactory.cs" />
     <Compile Include="Factories\RegularSudokuParserFactory.cs" />
+    <Compile Include="Models\NumberType.cs" />
     <Compile Include="Models\CompoundSudokuObject.cs" />
     <Compile Include="Models\MainGrid.cs" />
     <Compile Include="Models\Sudokus\BaseSudoku.cs" />

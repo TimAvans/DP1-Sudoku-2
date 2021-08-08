@@ -20,7 +20,6 @@ namespace Sudoku.Factories
         }
 
         public const string TYPE = "NormalSudoku";
-
         public void LoadTypes()
         {
             Type[] typesInThisAssembly = Assembly.GetExecutingAssembly().GetTypes();

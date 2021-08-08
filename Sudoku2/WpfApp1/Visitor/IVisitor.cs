@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WpfApp1.Visitor
+namespace Sudoku.Visitor
 {
     public interface IVisitor
     {
