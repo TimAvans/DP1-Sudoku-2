@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows.Input;
 using Sudoku.Visitor;
+using System.Collections.ObjectModel;
 
 namespace Sudoku.ViewModel
 {
@@ -22,8 +23,7 @@ namespace Sudoku.ViewModel
         private string _stateText;
         public string StateText { get { return _stateText; } set { _stateText = value; RaisePropertyChanged("StateText"); } }
         
-        private List<string> _validationMessages;
-        public List<string> ValidationMessages { get { return _validationMessages; } set { _validationMessages = value; RaisePropertyChanged("ValidationMessages"); } }
+        public ObservableCollection<string> ValidationMessages { get; set; }
         public ICommand ExecuteCustomCommand { get; set; }
 
         private Dictionary<string, ICustomCommand> _commands;
@@ -32,7 +32,7 @@ namespace Sudoku.ViewModel
 
             CreateCommands();
 
-            ValidationMessages = new List<string>();
+            ValidationMessages = new ObservableCollection<string>();
 
             ExecuteCustomCommand = new RelayCommand<string>(ExecuteCommand);
 

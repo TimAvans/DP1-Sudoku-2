@@ -28,7 +28,10 @@ namespace Sudoku.Commands
         }
         private void LoadValidationMessages()
         {
-            _mvm.ValidationMessages = _mvm.Sudoku.getSudoku().GetValidationMessages();
+            foreach (string message in _mvm.Sudoku.getSudoku().GetValidationMessages())
+            {
+                _mvm.ValidationMessages.Add(message);
+            }
         }
     }
 }
