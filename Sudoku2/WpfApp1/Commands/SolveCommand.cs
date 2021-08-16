@@ -10,7 +10,8 @@ using System.Threading.Tasks;
 
 namespace Sudoku.Commands
 {
-    public enum SolveState { 
+    public enum SolveState
+    {
         TRUE,
         FALSE,
         TBD
@@ -28,6 +29,11 @@ namespace Sudoku.Commands
 
         public void Execute()
         {
+            if (_mvm.Sudoku == null)
+            {
+                return;
+            }
+
             _state = SolveState.TBD;
             _mvm.ValidationMessages.Clear();
             _mvm.ValidationMessages.Add("Trying to solve sudoku.");
@@ -40,7 +46,7 @@ namespace Sudoku.Commands
                 _mvm.Sudoku.getSudoku().Accept(v);
 
                 _state = _mvm.Sudoku.getSudoku().IsValidated ? SolveState.FALSE : SolveState.TRUE;
-               
+
                 if (_state == SolveState.FALSE)
                 {
                     _mvm.ValidationMessages.Add("Could not solve Sudoku.");
@@ -87,9 +93,9 @@ namespace Sudoku.Commands
                     }
                     if (inMainGrid)
                     {
-                        foreach(Cell c in grid.Children)
+                        foreach (Cell c in grid.Children)
                         {
-                            if((c.X == checkCell.X ^ c.Y == checkCell.Y) && c.Value == value)
+                            if ((c.X == checkCell.X ^ c.Y == checkCell.Y) && c.Value == value)
                             {
                                 return false;
                             }
