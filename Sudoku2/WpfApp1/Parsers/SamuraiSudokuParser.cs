@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Sudoku.Visitor;
+using System.Text.RegularExpressions;
 
 namespace Sudoku.Parsers
 {
@@ -22,6 +23,11 @@ namespace Sudoku.Parsers
         public BaseSudoku Parse(string filedata)
         {
             List<string> file = File.ReadAllLines(filedata).ToList();
+
+            if(file.Count != 5)
+            {
+                return null;
+            }
 
             List<MainGrid> boards = new List<MainGrid>();
 
