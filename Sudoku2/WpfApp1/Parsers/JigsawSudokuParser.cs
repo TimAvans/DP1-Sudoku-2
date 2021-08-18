@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Sudoku.Parsers
@@ -38,6 +39,13 @@ namespace Sudoku.Parsers
             };
 
             string line = File.ReadAllLines(filedata)[0];
+
+            Match m = Regex.Match(line, "(SumoCueV1(=[0-9]J[0-9]){1,})");
+
+            if (line.Length != m.Value.Length)
+            {
+                return null;
+            }
 
             string[] data = line.Split('=');
 

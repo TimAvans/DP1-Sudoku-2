@@ -44,6 +44,11 @@ namespace Sudoku.Parsers
             double amt_regionrow = gridWidth / (gridWidth / Math.Floor(Math.Sqrt(gridWidth)));
             double regionrowsize = gridWidth / amt_regionrow;
 
+            if(line.Length % gridWidth != 0)
+            {
+                return null;
+            }
+
             int regBegin = 0;
             int regY = 0; //Y in region
             int regX = -1; //X in region
@@ -64,6 +69,11 @@ namespace Sudoku.Parsers
 
             foreach (char c in line)
             {
+                if (char.IsLetter(c))
+                {
+                    return null;
+                }
+
                 //gridwidth behaald, regeltje omlaag
                 if (currX >= gridWidth - 1) //Ga row naar beneden
                 {

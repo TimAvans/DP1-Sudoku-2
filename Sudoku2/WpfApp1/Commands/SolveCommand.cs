@@ -10,7 +10,8 @@ using System.Threading.Tasks;
 
 namespace Sudoku.Commands
 {
-    public enum SolveState { 
+    public enum SolveState
+    {
         TRUE,
         FALSE,
         TBD
@@ -30,6 +31,10 @@ namespace Sudoku.Commands
 
         public void Execute()
         {
+            if (_mvm.Sudoku == null)
+            {
+                return;
+            }
             solvedSudoku = _mvm.Sudoku.getSudoku();
             Solve();
             //_state = SolveState.TBD;
@@ -115,7 +120,7 @@ namespace Sudoku.Commands
                     }
                     if (inMainGrid)
                     {
-                        foreach(Cell c in grid.Children)
+                        foreach (Cell c in grid.Children)
                         {
                             if (c.X == checkCell.X)
                             {
