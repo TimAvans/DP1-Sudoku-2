@@ -29,22 +29,25 @@ namespace SudokuTestProject
                 for (int i = 0; i < 9; i++)
                 {
                     Grid grid = new Grid(i);
-                    int x = i*3 > 8 ? 0 : i*3;
+                    int xRow = i - (gridAmount / 3) * 3;
+
+                    int x = xRow*3 > 8 ? 0 : xRow*3;
+                    int initX = x;
 
                     int y = 0;
-                    if(gridAmount >= 3)
+                    if (gridAmount >= 6)
+                    {
+                        y = 6;
+                    }else if (gridAmount >= 3)
                     {
                         y = 3;
                     }
-                    if(gridAmount >= 6)
-                    {
-                        y = 5;
-                    }
+
                     for (int c = 0; c < 9; c++)
                     {
-                        if(x > i * 3 + 2)
+                        if(x > initX + 2)
                         {
-                            x = i * 3 > 8 ? 0 : i * 3;
+                            x = initX;
                             y++;
                         }
                         grid.Children.Add(new Cell(c, 9, x, y, "black"));
@@ -55,10 +58,16 @@ namespace SudokuTestProject
                 }
                 boards.Add(mainGrid);
             }
+
+            boards[2].Children[0] = boards[0].Children[8];
+            boards[2].Children[2] = boards[1].Children[6];
+            boards[2].Children[6] = boards[3].Children[2];
+            boards[2].Children[8] = boards[4].Children[0];
+
             SamuraiSudoku testSudoku = new SamuraiSudoku(boards);
 
             //Act
-            BaseSudoku sudoku = parser.Parse("C:\\Users\\RikVe\\Documents\\GitHub\\DP1-Sudoku-2\\Sudoku2\\SudokuTestProject\\test_files\\puzzle.samurai");
+            BaseSudoku sudoku = parser.Parse("..\\..\\test_files\\puzzle.samurai");
 
             //Assert
             Assert.IsInstanceOfType(sudoku, typeof(SamuraiSudoku));

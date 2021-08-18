@@ -13,18 +13,18 @@ namespace SudokuTestProject
         int IComparer.Compare(Object x, Object y)
         {
 
-            MainGrid mainGridX = (MainGrid)x;
-            MainGrid mainGridY = (MainGrid)y;
-            for (int g = 0; g < mainGridX.Children.Count; g++)
+            MainGrid sudoku = (MainGrid)x;
+            MainGrid testsudoku = (MainGrid)y;
+            for (int g = 0; g < sudoku.Children.Count; g++)
             {
-                Grid gridX = (Grid)mainGridX.Children[g];
-                Grid gridY = (Grid)mainGridY.Children[g];
-                for (int c = 0; c < gridX.Children.Count; c++)
+                Grid gridSudoku = (Grid)sudoku.Children[g];
+                Grid gridTestsudoku = (Grid)testsudoku.Children[g];
+                for (int c = 0; c < gridSudoku.Children.Count; c++)
                 {
-                    Cell cellX = (Cell)gridX.Children[c];
-                    Cell cellY = (Cell)gridY.Children[c];
+                    Cell cellSudoku = (Cell)gridSudoku.Children[c];
+                    Cell cellTestsudoku = (Cell)gridTestsudoku.Children[c];
 
-                    if (cellX.Value != cellY.Value || cellX.X != cellY.X || cellX.Y != cellY.Y)
+                    if (cellSudoku.Value != cellTestsudoku.Value || cellSudoku.X != cellTestsudoku.X || cellSudoku.Y != cellTestsudoku.Y)
                     {
                         return -1;
                     }

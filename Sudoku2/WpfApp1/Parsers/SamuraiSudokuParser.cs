@@ -47,6 +47,11 @@ namespace Sudoku.Parsers
 
             foreach (string line in file)
             {
+                if(line.Length != 81)
+                {
+                    return null;
+                }
+
                 int regNumber = 0;
                 int gridWidth = (int)Math.Sqrt(line.Length);
                 double amt_regionrow = gridWidth / (gridWidth / Math.Floor(Math.Sqrt(gridWidth)));
@@ -68,6 +73,11 @@ namespace Sudoku.Parsers
 
                 foreach (char c in line)
                 {
+                    if (char.IsLetter(c))
+                    {
+                        return null;
+                    }
+
                     //gridwidth behaald, regeltje omlaag
                     if (currX >= gridWidth - 1) //Ga row naar beneden
                     {

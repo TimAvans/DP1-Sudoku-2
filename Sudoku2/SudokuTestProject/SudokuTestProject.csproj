@@ -49,16 +49,20 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="JigsawParserTests.cs" />
-    <Compile Include="SamuraiParserTests.cs" />
+    <Compile Include="parser_tests\JigsawParserTests.cs" />
+    <Compile Include="parser_tests\NormalSudokuTests.cs" />
+    <Compile Include="parser_tests\SamuraiParserTests.cs" />
     <Compile Include="SudokuComparer.cs" />
-    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="test_files\invalid.normal" />
     <None Include="test_files\invalid.samurai" />
     <None Include="test_files\invalid.jigsaw" />
+    <None Include="test_files\puzzle.normal4x4" />
+    <None Include="test_files\puzzle.normal6x6" />
+    <None Include="test_files\puzzle.normal9x9" />
     <None Include="test_files\puzzle.samurai" />
     <None Include="test_files\puzzle.jigsaw" />
   </ItemGroup>
