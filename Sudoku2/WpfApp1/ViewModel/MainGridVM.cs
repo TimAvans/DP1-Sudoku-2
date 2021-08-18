@@ -18,8 +18,8 @@ namespace Sudoku.ViewModel
 
         public string ValidationMessage { get { return _grid.ValidationMessage; }}
 
-        public int X { get { return _grid.X; } set { _grid.X = value; RaisePropertyChanged("X"); } }
-        public int Y { get { return _grid.Y; } set { _grid.Y = value; RaisePropertyChanged("Y"); } }
+        public int X { get { return _grid.X; } }
+        public int Y { get { return _grid.Y; } }
 
         public MainGridVM(MainGrid grid) 
         {

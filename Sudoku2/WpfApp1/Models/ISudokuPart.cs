@@ -13,8 +13,8 @@ namespace Sudoku.Models
 
         string ValidationMessage { get; }
 
-        int X { get; set; }
-        int Y { get; set; }
+        int X { get; }
+        int Y { get; }
         void Accept(IVisitor visitor);
         List<string> GetValidationMessages();
 

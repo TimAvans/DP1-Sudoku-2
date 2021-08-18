@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Sudoku.State
 {
     public class StateManager{
-        public State CurrentState { get; set; }
+        public State CurrentState { get; private set; }
 
         private StateManager()
         {

@@ -12,9 +12,7 @@ namespace Sudoku.Models
     {
         public List<ISudokuPart> Children { get; set; }
 
-        public List<string> ValidationMessages { get; set; }
-
-        public int ID { get; set; }
+        public int ID { get; protected set; }
         public int X { get; set; }
         public int Y { get; set; }
         public bool IsValidated { get; set; }

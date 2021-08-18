@@ -27,12 +27,12 @@ namespace Sudoku.Models
             }
         }
         public int Value { get; set; }
-        public int MaxValue { get; set; }
+        public int MaxValue { get; private set; }
         public string Color { get; set; }
         public NumberType NumberState { get; set; }
         public bool IsValidated { get; set; }
-        public int X { get; set; }
-        public int Y { get; set; }
+        public int X { get; private set; }
+        public int Y { get; private set; }
         public string ValidationMessage { get {return "    ** Cell (" + X + ", " + Y + ") with value " + Value + " is not valid"; } }
 
         public void Accept(IVisitor visitor)

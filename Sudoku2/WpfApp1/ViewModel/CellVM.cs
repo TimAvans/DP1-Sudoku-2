@@ -34,10 +34,10 @@ namespace Sudoku.ViewModel
         }
 
         private int _x, _y;
-        public int X { get { return _x; } set { _x = value * Size; } }
-        public int Y { get { return _y; } set { _y = value * Size; } }
+        public int X { get { return _x; } private set { _x = value * Size; } }
+        public int Y { get { return _y; } private set { _y = value * Size; } }
 
-        public NumberType NumberState { get { return _cell.NumberState; } set { _cell.NumberState = value; RaisePropertyChanged("NumberState"); RaisePropertyChanged("ForegroundColor") ; } }
+        public NumberType NumberState { get { return _cell.NumberState; } set { _cell.NumberState = value; RaisePropertyChanged("NumberState"); } }
 
         public int Size{ get { return 30; } }
 

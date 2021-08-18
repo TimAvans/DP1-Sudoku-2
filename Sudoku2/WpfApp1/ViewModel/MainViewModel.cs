@@ -24,9 +24,10 @@ namespace Sudoku.ViewModel
         public string StateText { get { return _stateText; } set { _stateText = value; RaisePropertyChanged("StateText"); } }
         
         public ObservableCollection<string> ValidationMessages { get; set; }
-        public ICommand ExecuteCustomCommand { get; set; }
+        public ICommand ExecuteCustomCommand { get; private set; }
 
         private Dictionary<string, ICustomCommand> _commands;
+        
         public MainViewModel()
         {
 
