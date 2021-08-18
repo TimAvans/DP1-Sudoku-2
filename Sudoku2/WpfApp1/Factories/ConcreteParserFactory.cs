@@ -10,7 +10,7 @@ namespace Sudoku.Factories
 {
     public class ConcreteParserFactory : IAbstractFactory<AbstractParserFactory>
     {
-        public Dictionary<string, AbstractParserFactory> Types { get; set; }
+        private Dictionary<string, AbstractParserFactory> Types { get; set; }
 
         public ConcreteParserFactory()
         {
@@ -21,10 +21,10 @@ namespace Sudoku.Factories
         public AbstractParserFactory Create(string type)
         {
             AbstractParserFactory tmp = Types[type];
-            return (AbstractParserFactory)tmp.Clone();
+            return tmp.Clone();
         }
 
-        public void LoadTypes()
+        private void LoadTypes()
         {
             Type[] typesInThisAssembly = Assembly.GetExecutingAssembly().GetTypes();
 
@@ -46,7 +46,7 @@ namespace Sudoku.Factories
             }
         }
 
-        public void Register(string type, AbstractParserFactory obj)
+        private void Register(string type, AbstractParserFactory obj)
         {
             Types[type] = obj;
         }

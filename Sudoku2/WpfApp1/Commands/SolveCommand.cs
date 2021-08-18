@@ -20,6 +20,8 @@ namespace Sudoku.Commands
     {
         private MainViewModel _mvm;
 
+        private BaseSudoku solvedSudoku;
+
         private SolveState _state;
         public SolveCommand(MainViewModel mvm)
         {
@@ -28,49 +30,75 @@ namespace Sudoku.Commands
 
         public void Execute()
         {
-            _state = SolveState.TBD;
-            _mvm.ValidationMessages.Clear();
-            _mvm.ValidationMessages.Add("Trying to solve sudoku.");
+            solvedSudoku = _mvm.Sudoku.getSudoku();
+            Solve();
+            //_state = SolveState.TBD;
+            //_mvm.ValidationMessages.Clear();
+            //_mvm.ValidationMessages.Add("Trying to solve sudoku.");
 
-            Cell emptyCell = FindEmptyCell();
+            //Cell emptyCell = FindEmptyCell();
 
-            if (emptyCell == null)
-            {
-                ValidationVisitor v = new ValidationVisitor();
-                _mvm.Sudoku.getSudoku().Accept(v);
+            //if (emptyCell == null)
+            //{
+            //    ValidationVisitor v = new ValidationVisitor();
+            //    solvedSudoku.Accept(v);
 
-                _state = _mvm.Sudoku.getSudoku().IsValidated ? SolveState.FALSE : SolveState.TRUE;
+            //    _state = solvedSudoku.IsValidated ? SolveState.TRUE : SolveState.FALSE;
                
-                if (_state == SolveState.FALSE)
-                {
-                    _mvm.ValidationMessages.Add("Could not solve Sudoku.");
-                    _mvm.ValidationMessages.Add("Cuz u fucked up.");
-                }
-                else
-                {
-                    _mvm.ValidationMessages.Add("Solved Sudoku");
-                }
-                return;
-            }
+            //    if (_state == SolveState.FALSE)
+            //    {
+            //        _mvm.ValidationMessages.Add("Could not solve Sudoku.");
+            //    }
+            //    else
+            //    {
+            //        _mvm.ValidationMessages.Add("Solved Sudoku");
+            //        _mvm.Sudoku = new SudokuVM(solvedSudoku);
+            //    }
+            //    return;
+            //}
 
-            for (int i = 1; i <= emptyCell.MaxValue; i++)
+            //for (int i = 1; i <= emptyCell.MaxValue; i++)
+            //{
+            //    if (IsValid(emptyCell, i))
+            //    {
+            //        emptyCell.Value = i;
+            //        Execute();
+            //        if (_state == SolveState.FALSE)
+            //        {
+            //            emptyCell.Value = 0;
+            //        }
+            //    }
+            //}
+        }
+
+        private bool Solve() 
+        {
+            Cell cell = FindEmptyCell();
+            if (cell != null)
             {
-                if (IsValid(emptyCell, i))
+                for (int i = 1; i <= cell.MaxValue; i++)
                 {
-                    emptyCell.Value = i;
-                    Execute();
-                    if (_state == SolveState.FALSE)
+                    if (IsValid(cell, i))
                     {
-                        emptyCell.Value = 0;
+                        cell.Value = i;
+                        if (Solve())
+                        {
+                            Console.WriteLine("SOLVED : " + i);
+                            return true;
+                        }
                     }
                 }
+                return false;
             }
+            //Checken of validated
+            return false;
         }
 
         private bool IsValid(Cell checkCell, int value)
         {
             bool inMainGrid = false;
-            foreach (MainGrid mainGrid in _mvm.Sudoku.getSudoku().Children)
+            
+            foreach (MainGrid mainGrid in solvedSudoku.Children)
             {
                 foreach (Grid grid in mainGrid.Children)
                 {
@@ -89,10 +117,24 @@ namespace Sudoku.Commands
                     {
                         foreach(Cell c in grid.Children)
                         {
-                            if((c.X == checkCell.X ^ c.Y == checkCell.Y) && c.Value == value)
+                            if (c.X == checkCell.X)
                             {
-                                return false;
+                                if (c.Value == value)
+                                {
+                                    return false;
+                                }
                             }
+                            if (c.Y == checkCell.Y)
+                            {
+                                if (c.Value == value)
+                                {
+                                    return false;
+                                }
+                            }
+                            //if((c.X == checkCell.X ^ c.Y == checkCell.Y) && c.Value == value)
+                            //{
+                            //    return false;
+                            //}
                         }
                     }
                 }
@@ -103,7 +145,7 @@ namespace Sudoku.Commands
 
         private Cell FindEmptyCell()
         {
-            foreach (MainGrid mainGrid in _mvm.Sudoku.getSudoku().Children)
+            foreach (MainGrid mainGrid in solvedSudoku.Children)
             {
                 foreach (Grid grid in mainGrid.Children)
                 {

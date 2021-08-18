@@ -12,15 +12,16 @@ namespace Sudoku.Factories
 {
     public class RegularSudokuParserFactory : AbstractParserFactory, IAbstractFactory<IRegularSudokuParser>
     {
-        public Dictionary<string, IRegularSudokuParser> Types { get; set; }
+        private Dictionary<string, IRegularSudokuParser> Types { get; set; }
+
+        public const string TYPE = "NormalSudoku";
 
         public RegularSudokuParserFactory() { 
             Types = new Dictionary<string, IRegularSudokuParser>(); 
             LoadTypes(); 
         }
 
-        public const string TYPE = "NormalSudoku";
-        public void LoadTypes()
+        private void LoadTypes()
         {
             Type[] typesInThisAssembly = Assembly.GetExecutingAssembly().GetTypes();
 
@@ -42,9 +43,7 @@ namespace Sudoku.Factories
             }
         }
 
-
-
-        public void Register(string type, IRegularSudokuParser obj)
+        private void Register(string type, IRegularSudokuParser obj)
         {
             Types[type] = obj;
         }
@@ -52,7 +51,7 @@ namespace Sudoku.Factories
         public IRegularSudokuParser Create(string type)
         {
             IRegularSudokuParser tmp = Types[type];
-            return (IRegularSudokuParser)tmp.Clone();
+            return tmp.Clone();
         }
 
         public override AbstractParserFactory Clone()

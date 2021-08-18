@@ -12,7 +12,8 @@ namespace Sudoku.Factories
 {
     public class IrregularSudokuParserFactory : AbstractParserFactory, IAbstractFactory<IIrregularSudokuParser>
     {
-        public Dictionary<string, IIrregularSudokuParser> Types { get; set; }
+        private Dictionary<string, IIrregularSudokuParser> Types { get; set; }
+
         public const string TYPE = "NotNormalSudoku";
 
         public IrregularSudokuParserFactory() { 
@@ -20,7 +21,7 @@ namespace Sudoku.Factories
             LoadTypes();
         }
 
-        public void LoadTypes()
+        private void LoadTypes()
         {
             Type[] typesInThisAssembly = Assembly.GetExecutingAssembly().GetTypes();
 
@@ -42,7 +43,7 @@ namespace Sudoku.Factories
             }
         }
 
-        public void Register(string type, IIrregularSudokuParser obj)
+        private void Register(string type, IIrregularSudokuParser obj)
         {
             Types[type] = obj;
         }
@@ -50,7 +51,7 @@ namespace Sudoku.Factories
         public IIrregularSudokuParser Create(string type)
         {
             IIrregularSudokuParser tmp = Types[type];
-            return (IIrregularSudokuParser)tmp.Clone();
+            return tmp.Clone();
         }
 
         public override AbstractParserFactory Clone()
