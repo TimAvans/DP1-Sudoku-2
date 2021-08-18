@@ -31,7 +31,7 @@ namespace SudokuTestProject
             JigsawSudoku testSudoku = new JigsawSudoku(mainGrid);
 
             //Act
-            BaseSudoku sudoku = parser.Parse("C:\\Users\\RikVe\\Documents\\GitHub\\DP1-Sudoku-2\\Sudoku2\\SudokuTestProject\\test_files\\puzzle.jigsaw");
+            BaseSudoku sudoku = parser.Parse("..\\..\\test_files\\puzzle.jigsaw");
 
             //Assert
             Assert.IsInstanceOfType(sudoku, typeof(JigsawSudoku));

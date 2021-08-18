@@ -9,7 +9,7 @@ namespace SudokuTestProject
     public class FactoryUnitTests
     {
         [TestMethod]
-        public void TestCreateIrregularSudokuParser() 
+        public void Factory_CreateIrregularSudokuParser_ReturnCorrectParser() 
         {
             //Arrange
             IrregularSudokuParserFactory factory = new IrregularSudokuParserFactory();
@@ -25,7 +25,7 @@ namespace SudokuTestProject
         }        
         
         [TestMethod]
-        public void TestCreateRegularSudokuParser() 
+        public void Factory_CreateRegularSudokuParser_ReturnCorrectParser() 
         {
             //Arrange
             RegularSudokuParserFactory factory = new RegularSudokuParserFactory();
