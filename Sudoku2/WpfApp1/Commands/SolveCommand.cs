@@ -16,6 +16,7 @@ namespace Sudoku.Commands
 
         private BaseSudoku solvedSudoku;
 
+        Stack<Cell> cells = new Stack<Cell>();
         public SolveCommand(MainViewModel mvm)
         {
             this._mvm = mvm;
@@ -28,30 +29,43 @@ namespace Sudoku.Commands
                 return;
             }
             solvedSudoku = _mvm.Sudoku.getSudoku();
-            Solve();
+            Solve(null);
 
             _mvm.Sudoku = new SudokuVM(solvedSudoku);
         }
 
-        private bool Solve()
+        private bool Solve(Cell cell)
         {
-            Cell cell = FindEmptyCell();
+
+            if (cell == null)
+            {
+                cell = FindEmptyCell();
+            }
+
             if (cell != null)
             {
-                for (int i = 1; i <= cell.MaxValue; i++)
+                for (int i = cell.Value + 1; i <= cell.MaxValue; i++)
                 {
                     if (IsValid(cell, i))
                     {
                         cell.Value = i;
-                        if (Solve())
+                        cells.Push(cell);
+                        if (Solve(null))
                         {
                             Console.WriteLine("SOLVED : " + i);
                             return true;
                         }
                     }
+                    if(i == 9)
+                    {
+                        cell.Value = 0;
+                        i = 0;
+                        cell = cells.Pop();
+                    }
                 }
                 return false;
             }
+
             //Checken of validated
             return false;
         }
