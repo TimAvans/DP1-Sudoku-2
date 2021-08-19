@@ -10,20 +10,12 @@ using System.Threading.Tasks;
 
 namespace Sudoku.Commands
 {
-    public enum SolveState
-    {
-        TRUE,
-        FALSE,
-        TBD
-    }
-
     public class SolveCommand : ICustomCommand
     {
         private MainViewModel _mvm;
 
         private BaseSudoku solvedSudoku;
 
-        private SolveState _state;
         public SolveCommand(MainViewModel mvm)
         {
             this._mvm = mvm;
@@ -37,46 +29,11 @@ namespace Sudoku.Commands
             }
             solvedSudoku = _mvm.Sudoku.getSudoku();
             Solve();
-            //_state = SolveState.TBD;
-            //_mvm.ValidationMessages.Clear();
-            //_mvm.ValidationMessages.Add("Trying to solve sudoku.");
 
-            //Cell emptyCell = FindEmptyCell();
-
-            //if (emptyCell == null)
-            //{
-            //    ValidationVisitor v = new ValidationVisitor();
-            //    solvedSudoku.Accept(v);
-
-            //    _state = solvedSudoku.IsValidated ? SolveState.TRUE : SolveState.FALSE;
-               
-            //    if (_state == SolveState.FALSE)
-            //    {
-            //        _mvm.ValidationMessages.Add("Could not solve Sudoku.");
-            //    }
-            //    else
-            //    {
-            //        _mvm.ValidationMessages.Add("Solved Sudoku");
-            //        _mvm.Sudoku = new SudokuVM(solvedSudoku);
-            //    }
-            //    return;
-            //}
-
-            //for (int i = 1; i <= emptyCell.MaxValue; i++)
-            //{
-            //    if (IsValid(emptyCell, i))
-            //    {
-            //        emptyCell.Value = i;
-            //        Execute();
-            //        if (_state == SolveState.FALSE)
-            //        {
-            //            emptyCell.Value = 0;
-            //        }
-            //    }
-            //}
+            _mvm.Sudoku = new SudokuVM(solvedSudoku);
         }
 
-        private bool Solve() 
+        private bool Solve()
         {
             Cell cell = FindEmptyCell();
             if (cell != null)
@@ -102,7 +59,7 @@ namespace Sudoku.Commands
         private bool IsValid(Cell checkCell, int value)
         {
             bool inMainGrid = false;
-            
+
             foreach (MainGrid mainGrid in solvedSudoku.Children)
             {
                 foreach (Grid grid in mainGrid.Children)
@@ -110,6 +67,7 @@ namespace Sudoku.Commands
                     if (grid.Children.Contains(checkCell))
                     {
                         inMainGrid = true;
+
                         foreach (Cell c in grid.Children)
                         {
                             if (c.Value == value)
@@ -117,32 +75,29 @@ namespace Sudoku.Commands
                                 return false;
                             }
                         }
+                        break;
                     }
+                }
+
+                foreach (Grid grid in mainGrid.Children)
+                {
                     if (inMainGrid)
                     {
                         foreach (Cell c in grid.Children)
                         {
-                            if (c.X == checkCell.X)
+                            if (checkCell.X == 5 && checkCell.Y == 0)
                             {
-                                if (c.Value == value)
-                                {
-                                    return false;
-                                }
+                                Console.WriteLine("fkldajfla");
                             }
-                            if (c.Y == checkCell.Y)
+
+                            if ((c.X == checkCell.X ^ c.Y == checkCell.Y) && c.Value == value)
                             {
-                                if (c.Value == value)
-                                {
-                                    return false;
-                                }
+                                return false;
                             }
-                            //if((c.X == checkCell.X ^ c.Y == checkCell.Y) && c.Value == value)
-                            //{
-                            //    return false;
-                            //}
                         }
                     }
                 }
+
                 inMainGrid = false;
             }
             return true;
