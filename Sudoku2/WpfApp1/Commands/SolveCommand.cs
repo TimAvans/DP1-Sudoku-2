@@ -36,38 +36,28 @@ namespace Sudoku.Commands
 
         private bool Solve(Cell cell)
         {
-
             if (cell == null)
             {
                 cell = FindEmptyCell();
-            }
+            } 
 
             if (cell != null)
             {
-                for (int i = cell.Value + 1; i <= cell.MaxValue; i++)
+                for (int i = cell.Value; i <= cell.MaxValue; i++)
                 {
                     if (IsValid(cell, i))
                     {
                         cell.Value = i;
                         cells.Push(cell);
-                        if (Solve(null))
-                        {
-                            Console.WriteLine("SOLVED : " + i);
-                            return true;
-                        }
-                    }
-                    if(i == 9)
-                    {
-                        cell.Value = 0;
-                        i = 0;
-                        cell = cells.Pop();
+                        return Solve(null);
                     }
                 }
-                return false;
-            }
 
+                cell.Value = 0;
+                return Solve(cells.Pop());
+            }
             //Checken of validated
-            return false;
+            return true;
         }
 
         private bool IsValid(Cell checkCell, int value)
@@ -99,11 +89,6 @@ namespace Sudoku.Commands
                     {
                         foreach (Cell c in grid.Children)
                         {
-                            if (checkCell.X == 5 && checkCell.Y == 0)
-                            {
-                                Console.WriteLine("fkldajfla");
-                            }
-
                             if ((c.X == checkCell.X ^ c.Y == checkCell.Y) && c.Value == value)
                             {
                                 return false;
