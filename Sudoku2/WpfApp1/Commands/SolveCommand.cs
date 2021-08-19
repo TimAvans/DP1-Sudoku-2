@@ -5,6 +5,7 @@ using Sudoku.Visitor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,6 +18,7 @@ namespace Sudoku.Commands
         private BaseSudoku solvedSudoku;
 
         Stack<Cell> cells = new Stack<Cell>();
+
         public SolveCommand(MainViewModel mvm)
         {
             this._mvm = mvm;
@@ -29,7 +31,15 @@ namespace Sudoku.Commands
                 return;
             }
             solvedSudoku = _mvm.Sudoku.getSudoku();
-            Solve(null);
+
+            try
+            {
+                Solve(null);
+            }
+            catch (InsufficientExecutionStackException)
+            {
+                Console.WriteLine("Oopsie");
+            }
 
             _mvm.Sudoku = new SudokuVM(solvedSudoku);
         }
@@ -49,11 +59,15 @@ namespace Sudoku.Commands
                     {
                         cell.Value = i;
                         cells.Push(cell);
+
+                        RuntimeHelpers.EnsureSufficientExecutionStack();
                         return Solve(null);
                     }
                 }
 
                 cell.Value = 0;
+
+                RuntimeHelpers.EnsureSufficientExecutionStack();
                 return Solve(cells.Pop());
             }
             //Checken of validated
