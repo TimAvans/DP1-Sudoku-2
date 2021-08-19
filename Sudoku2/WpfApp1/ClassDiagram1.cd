@@ -1,0 +1,332 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Sudoku.Commands.ChangeGameStateCommand" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Commands\ChangeGameStateCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Sudoku.Commands.OpenFileCommand" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAAQAAAAAAAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Commands\OpenFileCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Sudoku.Commands.SolveCommand" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="15" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAgAAAAIAAAAAAAAAoAAAAAAAQA=</HashCode>
+      <FileName>Commands\SolveCommand.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_mvm" />
+      <Field Name="solvedSudoku" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Sudoku.Commands.ValidateCommand" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10.5" Y="3.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAgAAAAIAAAA=</HashCode>
+      <FileName>Commands\ValidateCommand.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_mvm" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Sudoku.Factories.AbstractParserFactory" Collapsed="true">
+    <Position X="6.5" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Factories\AbstractParserFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sudoku.Factories.ConcreteParserFactory" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="6.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EgAAAAAAAAAAAAAAAAAAAAAAAAABAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Factories\ConcreteParserFactory.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Types" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Sudoku.Factories.IrregularSudokuParserFactory">
+    <Position X="5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EgAAAAAAAAABAAAAAAAAAAAAAAABAEAAAAAAAAAAABA=</HashCode>
+      <FileName>Factories\IrregularSudokuParserFactory.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Types" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Sudoku.Factories.RegularSudokuParserFactory">
+    <Position X="8.25" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EgAAAAAAAAABAAAAAAAAAAAAAAABAEAAAAAAAAAAABA=</HashCode>
+      <FileName>Factories\RegularSudokuParserFactory.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Types" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Sudoku.Models.Cell" BaseTypeListCollapsed="true">
+    <Position X="24.25" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAABAAAAAAAAABAAAAIAAAAAAAAAEAAAggAAAYAA=</HashCode>
+      <FileName>Models\Cell.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="NumberState" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Sudoku.Models.CompoundSudokuObject" Collapsed="true">
+    <Position X="19.75" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAABAAAAAgAAAAAAEAIAAAAAAAAAEAAAAAAAAYAA=</HashCode>
+      <FileName>Models\CompoundSudokuObject.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Children" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Sudoku.Models.Grid" Collapsed="true">
+    <Position X="22" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Grid.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sudoku.Models.MainGrid" Collapsed="true">
+    <Position X="19.5" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\MainGrid.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sudoku.Models.Sudokus.BaseSudoku" Collapsed="true">
+    <Position X="16.5" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Sudokus\BaseSudoku.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sudoku.Models.Sudokus.JigsawSudoku" Collapsed="true">
+    <Position X="12" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Sudokus\JigsawSudoku.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sudoku.Models.Sudokus.NormalSudoku" Collapsed="true">
+    <Position X="14.25" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Sudokus\NormalSudoku.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sudoku.Models.Sudokus.SamuraiSudoku" Collapsed="true">
+    <Position X="16.5" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Sudokus\SamuraiSudoku.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sudoku.Parsers.JigsawSudokuParser" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="1.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Parsers\JigsawSudokuParser.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Sudoku.Parsers.NormalSudokuParser" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="1.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Parsers\NormalSudokuParser.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Sudoku.Parsers.SamuraiSudokuParser" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="1.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Parsers\SamuraiSudokuParser.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Sudoku.State.DefinitiveState">
+    <Position X="4.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>State\DefinitiveState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sudoku.State.HelpState">
+    <Position X="6.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>State\HelpState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sudoku.State.State">
+    <Position X="5.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>State\State.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sudoku.State.StateManager">
+    <Position X="8.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAACAAAAAAAAAAQAAAAIAAAAA=</HashCode>
+      <FileName>State\StateManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="CurrentState" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Sudoku.ViewModel.CellVM">
+    <Position X="22" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAQAgAABBAAAAAAAAAAAAAAAAAAggAAAYAA=</HashCode>
+      <FileName>ViewModel\CellVM.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_cell" />
+      <Property Name="NumberState" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Sudoku.ViewModel.GridVM">
+    <Position X="19.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAABAIIAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\GridVM.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_grid" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Field Name="_cells" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Sudoku.ViewModel.MainGridVM">
+    <Position X="16.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAAAQIAAAAAAAAAAAAAAAAAAAAAAYAA=</HashCode>
+      <FileName>ViewModel\MainGridVM.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_grid" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Field Name="_grids" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Sudoku.ViewModel.MainViewModel">
+    <Position X="14.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CIAAAABAACAEAAAAAAAAAAAAAAARAQAAAAAAABAAAAA=</HashCode>
+      <FileName>ViewModel\MainViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_sudoku" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Field Name="_commands" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Sudoku.ViewModel.SudokuVM">
+    <Position X="14.25" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAQJAAAAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\SudokuVM.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_sudoku" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Field Name="_grids" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Sudoku.ViewModel.ViewModelLocator" Collapsed="true">
+    <Position X="16.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEAAAAA=</HashCode>
+      <FileName>ViewModel\ViewModelLocator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sudoku.Visitor.ValidationVisitor" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIgAAAAAAAAAAAAAAAAAAAAAgAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Visitor\ValidationVisitor.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Interface Name="Sudoku.Commands.ICustomCommand" Collapsed="true">
+    <Position X="11.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\ICustomCommand.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Sudoku.Factories.IAbstractFactory&lt;T&gt;" Collapsed="true">
+    <Position X="4.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Factories\IAbstractFactory.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Sudoku.Models.ISudokuPart" Collapsed="true">
+    <Position X="18.75" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAABAAAAAAAAAAAAAAIAAAAAAAAAEAAAAAAAAYAA=</HashCode>
+      <FileName>Models\ISudokuPart.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Sudoku.Parsers.IIrregularSudokuParser" Collapsed="true">
+    <Position X="4.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Parsers\IIrregularSudokuParser.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Sudoku.Parsers.IRegularSudokuParser" Collapsed="true">
+    <Position X="8.25" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Parsers\IRegularSudokuParser.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Sudoku.Visitor.IVisitor" Collapsed="true">
+    <Position X="18.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIgAAAAAAAAAAAAAAAAAAAAAgAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Visitor\IVisitor.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="Sudoku.Models.NumberType" Collapsed="true">
+    <Position X="24.25" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>Models\NumberType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
