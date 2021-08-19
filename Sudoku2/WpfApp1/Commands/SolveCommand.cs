@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Sudoku.Commands
 {
@@ -15,6 +15,8 @@ namespace Sudoku.Commands
         private MainViewModel _mvm;
 
         private BaseSudoku solvedSudoku;
+
+        private int iterations = 0;
 
         Stack<Cell> cells = new Stack<Cell>();
         public SolveCommand(MainViewModel mvm)
@@ -29,13 +31,28 @@ namespace Sudoku.Commands
                 return;
             }
             solvedSudoku = _mvm.Sudoku.getSudoku();
-            Solve(null);
+
+            iterations = 0;
+            bool solved = Solve(null);
+
+            if(iterations >= 7525 && !solved)
+            {
+                iterations = 0;
+                Solve(null);
+            }
 
             _mvm.Sudoku = new SudokuVM(solvedSudoku);
         }
 
         private bool Solve(Cell cell)
         {
+            iterations++;
+
+            if(iterations >= 7525)
+            {
+                return false;
+            }
+
             if (cell == null)
             {
                 cell = FindEmptyCell();
