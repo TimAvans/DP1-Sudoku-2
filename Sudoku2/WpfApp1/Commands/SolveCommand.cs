@@ -14,10 +14,13 @@ namespace Sudoku.Commands
     public class SolveCommand : ICustomCommand
     {
         private MainViewModel _mvm;
+        
+        private bool inMainGrid = false;
 
         private BaseSudoku solvedSudoku;
 
         Stack<Cell> cells = new Stack<Cell>();
+        Stack<Cell> emptycells = new Stack<Cell>();
 
         public SolveCommand(MainViewModel mvm)
         {
@@ -31,25 +34,40 @@ namespace Sudoku.Commands
                 return;
             }
             solvedSudoku = _mvm.Sudoku.getSudoku();
-
+            emptycells = FindEmptyCells();
             try
             {
                 Solve(null);
             }
             catch (InsufficientExecutionStackException)
             {
-                Console.WriteLine("Oopsie");
+                Console.WriteLine("Too many tries please try again. ");
             }
 
             _mvm.Sudoku = new SudokuVM(solvedSudoku);
         }
 
+        //private bool solver() 
+        //{
+        //    //zoek een empty cell.
+        //    //wnr er geen gevonden wordt return true want dan is het t einde
+        //    //Wel eentje gevonden kijk of deze cel valid is met alle waardes van 1 tm max value
+        //    //Kan er geen valid gemaakt worden dan ga 1 cel terug en probeer andere waardes.
+        //}
+
         private bool Solve(Cell cell)
         {
             if (cell == null)
             {
-                cell = FindEmptyCell();
-            } 
+                if (emptycells.Count > 0)
+                {
+                    cell = emptycells.Pop();
+                }
+                else
+                {
+                    return true;
+                }
+            }
 
             if (cell != null)
             {
@@ -66,17 +84,15 @@ namespace Sudoku.Commands
                 }
 
                 cell.Value = 0;
-
                 RuntimeHelpers.EnsureSufficientExecutionStack();
-                return Solve(cells.Pop());
+                Cell tempcell = cells.Pop();
+                return Solve(tempcell);
             }
-            //Checken of validated
             return true;
         }
 
         private bool IsValid(Cell checkCell, int value)
         {
-            bool inMainGrid = false;
 
             foreach (MainGrid mainGrid in solvedSudoku.Children)
             {
@@ -110,14 +126,14 @@ namespace Sudoku.Commands
                         }
                     }
                 }
-
                 inMainGrid = false;
             }
             return true;
         }
 
-        private Cell FindEmptyCell()
+        private Stack<Cell> FindEmptyCells()
         {
+            Stack<Cell> cells = new Stack<Cell>();
             foreach (MainGrid mainGrid in solvedSudoku.Children)
             {
                 foreach (Grid grid in mainGrid.Children)
@@ -126,12 +142,12 @@ namespace Sudoku.Commands
                     {
                         if (cell.Value == 0)
                         {
-                            return cell;
+                            cells.Push(cell);
                         }
                     }
                 }
             }
-            return null;
+            return cells;
         }
     }
 }
