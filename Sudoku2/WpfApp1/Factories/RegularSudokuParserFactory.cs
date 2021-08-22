@@ -30,12 +30,8 @@ namespace Sudoku.Factories
                 if (type.GetInterfaces().Contains(typeof(IRegularSudokuParser)))
                 {
                     FieldInfo field = type.GetField("TYPE");
-                    if (field == null)
-                    {
-                        Console.WriteLine("There are no types");
-                    }
-                    else
-                    {
+                    if (field != null)
+                    { 
                         Register(field.GetValue(null).ToString(),
                         (IRegularSudokuParser)Activator.CreateInstance(type));
                     }

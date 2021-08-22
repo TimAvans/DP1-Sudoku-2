@@ -78,20 +78,19 @@ namespace Sudoku.Parsers
                         return null;
                     }
 
-                    //gridwidth behaald, regeltje omlaag
-                    if (currX >= gridWidth - 1) //Ga row naar beneden
+                    if (currX >= gridWidth - 1) //Go down a row
                     {
                         sudokuY++;
                         sudokuX = 0;
                         if (regY >= amt_regionrow - 1)
-                        {//regio omlaag
+                        {//region down
                             regX = 0;
                             currX = 0;
                             regY = 0;
                             regNumber++;
                             regBegin = regNumber;
                         }
-                        else //regio naar links
+                        else //region to the left
                         {
                             regX = 0;
                             currX = 0;
@@ -101,7 +100,7 @@ namespace Sudoku.Parsers
                     }
                     else
                     {
-                        if (regX >= regionrowsize - 1) //regio naar rechts
+                        if (regX >= regionrowsize - 1) //region to the right
                         {
                             regX = -1;
                             regNumber++;
@@ -110,8 +109,6 @@ namespace Sudoku.Parsers
                         currX++;
                         sudokuX++;
                     }
-
-                    Console.WriteLine("x: " + regX + "; y: " + regY + "; reg:" + regNumber);
 
                     Cell cell = new Cell((int)Char.GetNumericValue(c), gridWidth, sudokuX, sudokuY, colors[regNumber]);
                     regions[regNumber].Children.Add(cell);

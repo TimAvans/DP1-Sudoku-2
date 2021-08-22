@@ -2,6 +2,7 @@
 using Sudoku.Factories;
 using Sudoku.Models.Sudokus;
 using Sudoku.Parsers;
+using Sudoku.State;
 using Sudoku.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -43,6 +44,7 @@ namespace Sudoku.Commands
                     sudoku = parser.Parse(dialog.FileName);
                 }
 
+                StateManager.Instance().HasSudokuChanged = true;
                 _mvm.Sudoku = new SudokuVM(sudoku);
             }
         }

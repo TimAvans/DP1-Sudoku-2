@@ -8,7 +8,6 @@ namespace Sudoku.Factories
 {
     public interface IAbstractFactory<T>
     {
-        //Factory functies
         T Create(string type);
     }
 }

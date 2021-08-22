@@ -1,10 +1,12 @@
 ﻿using Sudoku.Models;
 using Sudoku.Models.Sudokus;
+using Sudoku.State;
 using Sudoku.ViewModel;
 using Sudoku.Visitor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,6 +18,8 @@ namespace Sudoku.Commands
 
         private BaseSudoku solvedSudoku;
 
+        private List<Cell> editablecells = new List<Cell>();
+        private int currentCell;
         public SolveCommand(MainViewModel mvm)
         {
             this._mvm = mvm;
@@ -28,32 +32,59 @@ namespace Sudoku.Commands
                 return;
             }
             solvedSudoku = _mvm.Sudoku.getSudoku();
-            Solve();
+
+            if (StateManager.Instance().HasSudokuChanged)
+            {
+                currentCell = 0;
+                StateManager.Instance().HasSudokuChanged = false;
+            }
+
+            editablecells = FindEditableCells();
+            try
+            {
+                Solve(null);
+            }
+            catch (InsufficientExecutionStackException)
+            {
+                _mvm.ValidationMessages.Clear();
+                _mvm.ValidationMessages.Add("Too many tries, please try again.");
+            }
 
             _mvm.Sudoku = new SudokuVM(solvedSudoku);
         }
 
-        private bool Solve()
+        private bool Solve(Cell cell)
         {
-            Cell cell = FindEmptyCell();
-            if (cell != null)
+            if (cell == null)
             {
-                for (int i = 1; i <= cell.MaxValue; i++)
+                if (currentCell < editablecells.Count)
                 {
-                    if (IsValid(cell, i))
-                    {
-                        cell.Value = i;
-                        if (Solve())
-                        {
-                            Console.WriteLine("SOLVED : " + i);
-                            return true;
-                        }
-                    }
+                    cell = editablecells[currentCell];
                 }
-                return false;
+                else
+                {
+                    return true;
+                }
             }
-            //Checken of validated
-            return false;
+
+            for (int i = editablecells[currentCell].Value; i <= editablecells[currentCell].MaxValue; i++)
+            {
+                if (IsValid(editablecells[currentCell], i))
+                {
+                    editablecells[currentCell].Value = i;
+                    currentCell++;
+
+                    RuntimeHelpers.EnsureSufficientExecutionStack();
+                    return Solve(null);
+                }
+            }
+
+            cell.Value = 0;
+
+            currentCell = --currentCell < 0 ? 0 : currentCell--;
+            RuntimeHelpers.EnsureSufficientExecutionStack();
+            Cell tempcell = editablecells[currentCell];
+            return Solve(tempcell);
         }
 
         private bool IsValid(Cell checkCell, int value)
@@ -85,11 +116,6 @@ namespace Sudoku.Commands
                     {
                         foreach (Cell c in grid.Children)
                         {
-                            if (checkCell.X == 5 && checkCell.Y == 0)
-                            {
-                                Console.WriteLine("fkldajfla");
-                            }
-
                             if ((c.X == checkCell.X ^ c.Y == checkCell.Y) && c.Value == value)
                             {
                                 return false;
@@ -97,28 +123,28 @@ namespace Sudoku.Commands
                         }
                     }
                 }
-
                 inMainGrid = false;
             }
             return true;
         }
 
-        private Cell FindEmptyCell()
+        private List<Cell> FindEditableCells()
         {
+            List<Cell> cells = new List<Cell>();
             foreach (MainGrid mainGrid in solvedSudoku.Children)
             {
                 foreach (Grid grid in mainGrid.Children)
                 {
                     foreach (Cell cell in grid.Children)
                     {
-                        if (cell.Value == 0)
+                        if (cell.NumberState != NumberType.START)
                         {
-                            return cell;
+                            cells.Add(cell);
                         }
                     }
                 }
             }
-            return null;
+            return cells;
         }
     }
 }
