@@ -27,6 +27,8 @@ namespace Sudoku.Commands
 
         public void Execute()
         {
+            _mvm.ValidationMessages.Clear();
+
             if (_mvm.Sudoku == null)
             {
                 return;
@@ -46,7 +48,6 @@ namespace Sudoku.Commands
             }
             catch (InsufficientExecutionStackException)
             {
-                _mvm.ValidationMessages.Clear();
                 _mvm.ValidationMessages.Add("Too many tries, please try again.");
             }
 
