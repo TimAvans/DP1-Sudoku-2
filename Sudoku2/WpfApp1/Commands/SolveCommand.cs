@@ -44,7 +44,7 @@ namespace Sudoku.Commands
             editablecells = FindEditableCells();
             try
             {
-                Solve(null);
+                Solve();
             }
             catch (InsufficientExecutionStackException)
             {
@@ -54,18 +54,12 @@ namespace Sudoku.Commands
             _mvm.Sudoku = new SudokuVM(solvedSudoku);
         }
 
-        private bool Solve(Cell cell)
+        private bool Solve()
         {
-            if (cell == null)
+
+            if (currentCell >= editablecells.Count)
             {
-                if (currentCell < editablecells.Count)
-                {
-                    cell = editablecells[currentCell];
-                }
-                else
-                {
-                    return true;
-                }
+                return true;
             }
 
             for (int i = editablecells[currentCell].Value; i <= editablecells[currentCell].MaxValue; i++)
@@ -76,16 +70,14 @@ namespace Sudoku.Commands
                     currentCell++;
 
                     RuntimeHelpers.EnsureSufficientExecutionStack();
-                    return Solve(null);
+                    return Solve();
                 }
             }
 
-            cell.Value = 0;
-
-            currentCell = --currentCell < 0 ? 0 : currentCell--;
+            editablecells[currentCell].Value = 0;
+            currentCell--;
             RuntimeHelpers.EnsureSufficientExecutionStack();
-            Cell tempcell = editablecells[currentCell];
-            return Solve(tempcell);
+            return Solve();
         }
 
         private bool IsValid(Cell checkCell, int value)
