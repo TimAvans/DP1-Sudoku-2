@@ -8,10 +8,12 @@ namespace Sudoku.State
 {
     public class StateManager{
         public State CurrentState { get; private set; }
+        public bool HasSudokuChanged { get; set; }
 
         private StateManager()
         {
             CurrentState = new HelpState();
+            HasSudokuChanged = false;
         }
 
         private static StateManager _stateManager;

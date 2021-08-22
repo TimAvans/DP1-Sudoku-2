@@ -1,5 +1,6 @@
 ﻿using Sudoku.Models;
 using Sudoku.Models.Sudokus;
+using Sudoku.State;
 using Sudoku.ViewModel;
 using Sudoku.Visitor;
 using System;
@@ -15,13 +16,10 @@ namespace Sudoku.Commands
     {
         private MainViewModel _mvm;
 
-        private bool inMainGrid = false;
-
         private BaseSudoku solvedSudoku;
 
-        Stack<Cell> cells = new Stack<Cell>();
-        List<Cell> emptycells = new List<Cell>();
-        int currentCell;
+        private List<Cell> editablecells = new List<Cell>();
+        private int currentCell;
         public SolveCommand(MainViewModel mvm)
         {
             this._mvm = mvm;
@@ -34,34 +32,34 @@ namespace Sudoku.Commands
                 return;
             }
             solvedSudoku = _mvm.Sudoku.getSudoku();
-            emptycells = FindEditableCells();
+
+            if (StateManager.Instance().HasSudokuChanged)
+            {
+                currentCell = 0;
+                StateManager.Instance().HasSudokuChanged = false;
+            }
+
+            editablecells = FindEditableCells();
             try
             {
                 Solve(null);
             }
             catch (InsufficientExecutionStackException)
             {
-                Console.WriteLine("Too many tries please try again. ");
+                _mvm.ValidationMessages.Clear();
+                _mvm.ValidationMessages.Add("Too many tries, please try again.");
             }
 
             _mvm.Sudoku = new SudokuVM(solvedSudoku);
         }
 
-        //private bool solver() 
-        //{
-        //    //zoek een empty cell.
-        //    //wnr er geen gevonden wordt return true want dan is het t einde
-        //    //Wel eentje gevonden kijk of deze cel valid is met alle waardes van 1 tm max value
-        //    //Kan er geen valid gemaakt worden dan ga 1 cel terug en probeer andere waardes.
-        //}
-
         private bool Solve(Cell cell)
         {
             if (cell == null)
             {
-                if (currentCell < emptycells.Count)
+                if (currentCell < editablecells.Count)
                 {
-                    cell = emptycells[currentCell];
+                    cell = editablecells[currentCell];
                 }
                 else
                 {
@@ -69,11 +67,11 @@ namespace Sudoku.Commands
                 }
             }
 
-            for (int i = emptycells[currentCell].Value; i <= emptycells[currentCell].MaxValue; i++)
+            for (int i = editablecells[currentCell].Value; i <= editablecells[currentCell].MaxValue; i++)
             {
-                if (IsValid(emptycells[currentCell], i))
+                if (IsValid(editablecells[currentCell], i))
                 {
-                    emptycells[currentCell].Value = i;
+                    editablecells[currentCell].Value = i;
                     currentCell++;
 
                     RuntimeHelpers.EnsureSufficientExecutionStack();
@@ -85,12 +83,13 @@ namespace Sudoku.Commands
 
             currentCell = --currentCell < 0 ? 0 : currentCell--;
             RuntimeHelpers.EnsureSufficientExecutionStack();
-            Cell tempcell = emptycells[currentCell];
+            Cell tempcell = editablecells[currentCell];
             return Solve(tempcell);
         }
 
         private bool IsValid(Cell checkCell, int value)
         {
+            bool inMainGrid = false;
 
             foreach (MainGrid mainGrid in solvedSudoku.Children)
             {
