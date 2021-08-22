@@ -14,14 +14,14 @@ namespace Sudoku.Commands
     public class SolveCommand : ICustomCommand
     {
         private MainViewModel _mvm;
-        
+
         private bool inMainGrid = false;
 
         private BaseSudoku solvedSudoku;
 
         Stack<Cell> cells = new Stack<Cell>();
-        Stack<Cell> emptycells = new Stack<Cell>();
-
+        List<Cell> emptycells = new List<Cell>();
+        int currentCell;
         public SolveCommand(MainViewModel mvm)
         {
             this._mvm = mvm;
@@ -34,7 +34,7 @@ namespace Sudoku.Commands
                 return;
             }
             solvedSudoku = _mvm.Sudoku.getSudoku();
-            emptycells = FindEmptyCells();
+            emptycells = FindEditableCells();
             try
             {
                 Solve(null);
@@ -59,9 +59,9 @@ namespace Sudoku.Commands
         {
             if (cell == null)
             {
-                if (emptycells.Count > 0)
+                if (currentCell < emptycells.Count)
                 {
-                    cell = emptycells.Pop();
+                    cell = emptycells[currentCell];
                 }
                 else
                 {
@@ -69,26 +69,24 @@ namespace Sudoku.Commands
                 }
             }
 
-            if (cell != null)
+            for (int i = emptycells[currentCell].Value; i <= emptycells[currentCell].MaxValue; i++)
             {
-                for (int i = cell.Value; i <= cell.MaxValue; i++)
+                if (IsValid(emptycells[currentCell], i))
                 {
-                    if (IsValid(cell, i))
-                    {
-                        cell.Value = i;
-                        cells.Push(cell);
+                    emptycells[currentCell].Value = i;
+                    currentCell++;
 
-                        RuntimeHelpers.EnsureSufficientExecutionStack();
-                        return Solve(null);
-                    }
+                    RuntimeHelpers.EnsureSufficientExecutionStack();
+                    return Solve(null);
                 }
-
-                cell.Value = 0;
-                RuntimeHelpers.EnsureSufficientExecutionStack();
-                Cell tempcell = cells.Pop();
-                return Solve(tempcell);
             }
-            return true;
+
+            cell.Value = 0;
+
+            currentCell = --currentCell < 0 ? 0 : currentCell--;
+            RuntimeHelpers.EnsureSufficientExecutionStack();
+            Cell tempcell = emptycells[currentCell];
+            return Solve(tempcell);
         }
 
         private bool IsValid(Cell checkCell, int value)
@@ -131,18 +129,18 @@ namespace Sudoku.Commands
             return true;
         }
 
-        private Stack<Cell> FindEmptyCells()
+        private List<Cell> FindEditableCells()
         {
-            Stack<Cell> cells = new Stack<Cell>();
+            List<Cell> cells = new List<Cell>();
             foreach (MainGrid mainGrid in solvedSudoku.Children)
             {
                 foreach (Grid grid in mainGrid.Children)
                 {
                     foreach (Cell cell in grid.Children)
                     {
-                        if (cell.Value == 0)
+                        if (cell.NumberState != NumberType.START)
                         {
-                            cells.Push(cell);
+                            cells.Add(cell);
                         }
                     }
                 }

@@ -20,7 +20,6 @@ namespace Sudoku.Visitor
             {
                 cell.IsValidated = false;
             }
-            Console.WriteLine("Cell validation: " + cell.IsValidated.ToString());
         }
 
         public void visitGrid(Grid grid)
@@ -47,7 +46,6 @@ namespace Sudoku.Visitor
                     grid.IsValidated = false;
                 }
             }
-            Console.WriteLine("Grid validation: " + grid.IsValidated.ToString());
         }
 
         public void visitMainGrid(MainGrid maingrid)
@@ -98,7 +96,6 @@ namespace Sudoku.Visitor
                     maingrid.IsValidated = false;
                 }
             }
-            Console.WriteLine("MainGrid validation: " + maingrid.IsValidated.ToString());
         }
 
         public void visitSudoku(BaseSudoku sudoku)
@@ -111,7 +108,6 @@ namespace Sudoku.Visitor
                     sudoku.IsValidated = false;
                 }
             }
-            Console.WriteLine("Sudoku validation: " + sudoku.IsValidated.ToString());
         }
     }
 }

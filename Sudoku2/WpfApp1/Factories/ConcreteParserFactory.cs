@@ -33,12 +33,7 @@ namespace Sudoku.Factories
                 if (type.BaseType == typeof(AbstractParserFactory))
                 {
                     FieldInfo field = type.GetField("TYPE");
-                    if (field == null)
-                    {
-                        Console.WriteLine("There are no types");
-                    }
-                    else
-                    {
+                    if (field != null) { 
                         Register(field.GetValue(null).ToString(),
                         (AbstractParserFactory)Activator.CreateInstance(type));
                     }
@@ -52,3 +47,4 @@ namespace Sudoku.Factories
         }
     }
 }
+

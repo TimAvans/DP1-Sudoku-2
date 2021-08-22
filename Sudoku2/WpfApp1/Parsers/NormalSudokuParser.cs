@@ -38,8 +38,7 @@ namespace Sudoku.Parsers
             MainGrid board = new MainGrid(0);
             board.X = 300;
             board.Y = 100;
-            //Grid array
-            // -> subrosters -> cells
+
             int gridWidth = (int)Math.Sqrt(line.Length);
             double amt_regionrow = gridWidth / (gridWidth / Math.Floor(Math.Sqrt(gridWidth)));
             double regionrowsize = gridWidth / amt_regionrow;
@@ -59,8 +58,6 @@ namespace Sudoku.Parsers
 
             int regNumber = 0;
 
-            //List<Dictionary<string, int>> cell_data = new List<Dictionary<string, int>>();
-
             Grid[] regions = new Grid[gridWidth];
             for(int i = 0; i < gridWidth; i++)
             {
@@ -74,20 +71,19 @@ namespace Sudoku.Parsers
                     return null;
                 }
 
-                //gridwidth behaald, regeltje omlaag
-                if (currX >= gridWidth - 1) //Ga row naar beneden
+                if (currX >= gridWidth - 1) //Go row down
                 {
                     sudokuY++;
                     sudokuX = 0;
                     if (regY >= amt_regionrow - 1)
-                    {//regio omlaag
+                    { //region down
                         regX = 0;
                         currX = 0;
                         regY = 0;
                         regNumber++;
                         regBegin = regNumber;
                     }
-                    else //regio naar links
+                    else //region to the left
                     {
                         regX = 0;
                         currX = 0;
@@ -97,7 +93,7 @@ namespace Sudoku.Parsers
                 }
                 else
                 {
-                    if (regX >= regionrowsize - 1) //regio naar rechts
+                    if (regX >= regionrowsize - 1) //region to the right
                     {
                         regX = -1;
                         regNumber++;
@@ -109,26 +105,12 @@ namespace Sudoku.Parsers
 
                 Cell cell = new Cell((int)Char.GetNumericValue(c), gridWidth, sudokuX, sudokuY, colors[regNumber]);
                 regions[regNumber].Children.Add(cell);
-
-                //cell_data.Add(new Dictionary<string, int>
-                //{
-                //    { "value", (int)Char.GetNumericValue(c) },
-                //    { "region", regNumber},
-                //    { "superregion", 0 },
-                //    { "x", sudokuX },
-                //    { "y", sudokuY }
-                //});
             }
             
             foreach(Grid grid in regions)
             {
                 board.Children.Add(grid);
             }
-
-            //foreach (Cell cell in cells)
-            //{
-            //    Console.WriteLine(cell.value + ": " + cell.X + " " + cell.Y + "-----" + cell.region);
-            //}
 
             return new NormalSudoku(board);
         }
